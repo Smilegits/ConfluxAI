@@ -1,0 +1,9 @@
+# Web URLs for Data Extraction
+# Add one URL per line. Lines starting with # are comments and will be ignored.
+# Supported: any public webpage, article, blog, docs site, etc.
+#
+# Example:
+# https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/prerequisites-fusion-erp-analytics.html#GUID-9500DE59-BD65-4F0D-A7AD-326FB60E7253
+# https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/offerings-functional-areas---erp.html
+# https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/make-preview-features-available.html
+

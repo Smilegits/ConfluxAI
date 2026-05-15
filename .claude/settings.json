@@ -1,0 +1,6 @@
+{
+  "statusLine": {
+    "type": "command",
+    "command": "bash /mnt/d/projects/rag_chatbot/.claude/statusline-command.sh"
+  }
+}
