@@ -7,6 +7,7 @@ Flow:
 """
 from __future__ import annotations
 import logging
+import re
 import time
 from dataclasses import dataclass, field
 from enum import Enum
@@ -85,6 +86,21 @@ REWRITE_PROMPT = """Rewrite as a self-contained search query using conversation 
 Context: {context}
 User: {query}
 Rewritten query:"""
+
+
+# ── Fast intent pre-classifier ───────────────────────────────────────────────
+# End-anchored: matches ONLY if the whole message is a greeting — nothing else.
+_GREETING_ONLY_RE = re.compile(
+    r"^\s*(hi+|hello+|hey+|howdy|greetings|good\s+(?:morning|afternoon|evening|day)"
+    r"|what'?s\s+up|sup)[\s!?.,]*$",
+    re.IGNORECASE,
+)
+
+
+def _fast_classify(query: str) -> Intent | None:
+    if _GREETING_ONLY_RE.match(query):
+        return Intent.GREETING
+    return None
 
 
 # ── Orchestrator ─────────────────────────────────────────────────────────────
@@ -200,6 +216,9 @@ class Orchestrator:
 
     # ── helpers ──────────────────────────────────────────────────────────────
     def _classify(self, query: str, ctx: str) -> Intent:
+        fast = _fast_classify(query)
+        if fast:
+            return fast
         try:
             resp = self.llm.generate(
                 INTENT_PROMPT.format(query=query, context=ctx or "None"),

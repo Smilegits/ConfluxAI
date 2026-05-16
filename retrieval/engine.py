@@ -53,30 +53,53 @@ def vector_search(query: str, top_k: int = 10, where: dict | None = None) -> lis
             results.append(SearchResult(
                 chunk_id=res["ids"][0][i],
                 text=res["documents"][0][i],
-                score=1.0 - res["distances"][0][i],  # distance → similarity
+                score=1.0 - res["distances"][0][i],
                 metadata=meta,
                 parent_text=parent or None,
             ))
     return results
 
 
-# ── BM25 keyword search ─────────────────────────────────────────────────────
-def keyword_search(query: str, top_k: int = 10) -> list[SearchResult]:
+# ── BM25 keyword search ──────────────────────────────────────────────────────
+_bm25_cache: dict | None = None  # {"count": int, "corpus": list, "bm25": BM25Okapi}
+
+
+def _get_bm25_index() -> tuple[list, BM25Okapi | None]:
+    global _bm25_cache
     col = get_collection()
+    count = col.count()
+
+    if _bm25_cache is not None and _bm25_cache["count"] == count and count > 0:
+        return _bm25_cache["corpus"], _bm25_cache["bm25"]
+
     data = col.get(include=["documents", "metadatas"])
     if not data["ids"]:
-        return []
+        _bm25_cache = {"count": 0, "corpus": [], "bm25": None}
+        return [], None
 
     corpus = []
     tokenized = []
     for i, cid in enumerate(data["ids"]):
         meta = dict(data["metadatas"][i]) if data["metadatas"] else {}
         parent = meta.pop("parent_text", None)
-        corpus.append({"chunk_id": cid, "text": data["documents"][i],
-                        "metadata": meta, "parent_text": parent})
+        corpus.append({
+            "chunk_id": cid,
+            "text": data["documents"][i],
+            "metadata": meta,
+            "parent_text": parent,
+        })
         tokenized.append(WORD_RE.findall(data["documents"][i].lower()))
 
     bm25 = BM25Okapi(tokenized)
+    _bm25_cache = {"count": count, "corpus": corpus, "bm25": bm25}
+    return corpus, bm25
+
+
+def keyword_search(query: str, top_k: int = 10) -> list[SearchResult]:
+    corpus, bm25 = _get_bm25_index()
+    if not corpus or bm25 is None:
+        return []
+
     qtokens = WORD_RE.findall(query.lower())
     scores = bm25.get_scores(qtokens)
     mx = max(scores) if max(scores) > 0 else 1.0
@@ -88,9 +111,11 @@ def keyword_search(query: str, top_k: int = 10) -> list[SearchResult]:
             continue
         d = corpus[idx]
         results.append(SearchResult(
-            chunk_id=d["chunk_id"], text=d["text"],
+            chunk_id=d["chunk_id"],
+            text=d["text"],
             score=scores[idx] / mx,
-            metadata=d["metadata"], parent_text=d.get("parent_text"),
+            metadata=d["metadata"],
+            parent_text=d.get("parent_text"),
         ))
     return results
 

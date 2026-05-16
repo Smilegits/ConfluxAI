@@ -16,6 +16,22 @@ DATA_DIR = Path("data")
 URLS_FILE = DATA_DIR / "web_urls.txt"
 
 
+def _log_result(r: dict, label: str) -> None:
+    status = r.get("status")
+    title = r.get("title", label)
+    chunks = r.get("chunks", 0)
+    if status == "ok":
+        logger.info("  ✓ %s  [%d chunks]", title, chunks)
+    elif status == "skipped":
+        logger.info("  ↩ %s  [unchanged, %d chunks]", title, chunks)
+    elif status == "empty":
+        logger.warning("  ⚠ %s  [empty document]", title)
+    elif status == "no_chunks":
+        logger.warning("  ⚠ %s  [no chunks produced]", title)
+    else:
+        logger.warning("  ? %s  [status=%s]", title, status)
+
+
 def load_urls() -> list[str]:
     if not URLS_FILE.exists():
         return []
@@ -51,7 +67,7 @@ def run(urls: list[str], files: list[Path]) -> None:
         try:
             r = pipeline.ingest_url(url)
             results.append(r)
-            logger.info("  ✓ %s  [%d chunks]", r.get("title", url), r["chunks"])
+            _log_result(r, url)
         except Exception as e:
             logger.error("  ✗ %s — %s", url, e)
 
@@ -60,13 +76,18 @@ def run(urls: list[str], files: list[Path]) -> None:
         try:
             r = pipeline.ingest_file(str(path))
             results.append(r)
-            logger.info("  ✓ %s  [%d chunks]", path.name, r["chunks"])
+            _log_result(r, path.name)
         except Exception as e:
             logger.error("  ✗ %s — %s", path.name, e)
 
-    ok = sum(1 for r in results if r.get("status") == "ok")
-    total_chunks = sum(r.get("chunks", 0) for r in results)
-    print(f"\nDone. {ok}/{len(results)} sources ingested — {total_chunks} chunks stored in ChromaDB.")
+    ok = sum(1 for r in results if r.get("status") in ("ok", "skipped"))
+    new = sum(1 for r in results if r.get("status") == "ok")
+    skipped = sum(1 for r in results if r.get("status") == "skipped")
+    total_chunks = sum(r.get("chunks", 0) for r in results if r.get("status") == "ok")
+    print(
+        f"\nDone. {ok}/{len(results)} sources OK "
+        f"({new} ingested, {skipped} unchanged) — {total_chunks} new chunks stored."
+    )
 
 
 def main() -> None:

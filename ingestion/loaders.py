@@ -1,12 +1,15 @@
 """
-Source loaders — extract structured text from web pages, PDFs, DOCX, and plain text.
+Source loaders — extract structured text from web pages, PDFs, DOCX, CSV, Excel, and plain text.
 Each returns a RawDocument with text, sections, and metadata.
 """
 from __future__ import annotations
+import csv
 import hashlib
 import logging
+import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
+from pathlib import Path
 from urllib.parse import urlparse
 
 import fitz  # PyMuPDF
@@ -84,7 +87,7 @@ class PDFLoader:
         doc.close()
         return RawDocument(
             text="\n\n".join(parts),
-            metadata={"source_type": "pdf", "source": path, "title": path.split("/")[-1],
+            metadata={"source_type": "pdf", "source": path, "title": Path(path).stem,
                        "pages": len(sections), "ingested_at": datetime.now(timezone.utc).isoformat()},
             sections=sections,
         )
@@ -120,8 +123,143 @@ class DocxLoader:
         full = "\n\n".join((f"## {s['heading']}\n{s['text']}" if s["heading"] else s["text"]) for s in sections)
         return RawDocument(
             text=full,
-            metadata={"source_type": "docx", "source": path, "title": path.split("/")[-1],
+            metadata={"source_type": "docx", "source": path, "title": Path(path).stem,
                        "ingested_at": datetime.now(timezone.utc).isoformat()},
+            sections=sections,
+        )
+
+
+class CSVLoader:
+    _GROUP_SIZE = 12
+
+    def load(self, path: str) -> RawDocument:
+        rows = self._read(path)
+        if not rows:
+            return RawDocument(
+                text="",
+                metadata={"source_type": "csv", "source": path, "title": Path(path).stem},
+            )
+
+        headers = list(rows[0].keys())
+        sections: list[dict] = []
+
+        for i in range(0, len(rows), self._GROUP_SIZE):
+            batch = rows[i:i + self._GROUP_SIZE]
+            lines = []
+            for row in batch:
+                parts = [f"{k}: {v}" for k, v in row.items() if str(v).strip()]
+                if parts:
+                    lines.append(" | ".join(parts))
+            if not lines:
+                continue
+            heading = f"Rows {i + 1}–{min(i + self._GROUP_SIZE, len(rows))}"
+            sections.append({"heading": heading, "text": "\n".join(lines)})
+
+        full_text = "\n\n".join(
+            (f"## {s['heading']}\n{s['text']}" if s["heading"] else s["text"])
+            for s in sections
+        )
+        return RawDocument(
+            text=full_text,
+            metadata={
+                "source_type": "csv",
+                "source": path,
+                "title": Path(path).stem,
+                "columns": ", ".join(headers),
+                "row_count": len(rows),
+                "ingested_at": datetime.now(timezone.utc).isoformat(),
+            },
+            sections=sections,
+        )
+
+    @staticmethod
+    def _read(path: str) -> list[dict]:
+        for enc in ("utf-8-sig", "utf-8", "latin-1"):
+            try:
+                with open(path, newline="", encoding=enc) as f:
+                    return list(csv.DictReader(f))
+            except UnicodeDecodeError:
+                continue
+        raise ValueError(f"Cannot decode CSV: {path}")
+
+
+class ExcelLoader:
+    _GROUP_SIZE = 12
+
+    def load(self, path: str) -> RawDocument:
+        try:
+            import openpyxl
+        except ImportError:
+            raise ImportError("openpyxl required for Excel files: pip install openpyxl")
+
+        wb = openpyxl.load_workbook(path, read_only=True, data_only=True)
+        sections: list[dict] = []
+
+        for sheet_name in wb.sheetnames:
+            ws = wb[sheet_name]
+            raw_rows = [
+                [str(cell.value).strip() if cell.value is not None else "" for cell in row]
+                for row in ws.iter_rows()
+            ]
+            raw_rows = [r for r in raw_rows if any(c for c in r)]
+            if not raw_rows:
+                continue
+
+            headers = raw_rows[0]
+            data_rows = raw_rows[1:] if len(raw_rows) > 1 else []
+            if not data_rows:
+                # Single-row sheet — treat as header-only, emit as-is
+                sections.append({"heading": sheet_name, "text": " | ".join(headers)})
+                continue
+
+            for i in range(0, len(data_rows), self._GROUP_SIZE):
+                batch = data_rows[i:i + self._GROUP_SIZE]
+                lines = []
+                for row in batch:
+                    if len(headers) == len(row):
+                        parts = [f"{h}: {v}" for h, v in zip(headers, row) if v]
+                    else:
+                        parts = [v for v in row if v]
+                    if parts:
+                        lines.append(" | ".join(parts))
+                if not lines:
+                    continue
+                end_row = min(i + self._GROUP_SIZE, len(data_rows))
+                heading = f"{sheet_name} — rows {i + 2}–{end_row + 1}"
+                sections.append({"heading": heading, "text": "\n".join(lines)})
+
+        wb.close()
+
+        full_text = "\n\n".join(
+            (f"## {s['heading']}\n{s['text']}" if s["heading"] else s["text"])
+            for s in sections
+        )
+        return RawDocument(
+            text=full_text,
+            metadata={
+                "source_type": "excel",
+                "source": path,
+                "title": Path(path).stem,
+                "sheets": len(wb.sheetnames),
+                "ingested_at": datetime.now(timezone.utc).isoformat(),
+            },
+            sections=sections,
+        )
+
+
+class TxtLoader:
+    def load(self, path: str) -> RawDocument:
+        text = Path(path).read_text(encoding="utf-8", errors="replace")
+        paragraphs = [p.strip() for p in re.split(r"\n\s*\n", text) if p.strip()]
+        sections = [{"heading": "", "text": p} for p in paragraphs]
+        return RawDocument(
+            text=text,
+            metadata={
+                "source_type": "text",
+                "source": path,
+                "title": Path(path).stem,
+                "ingested_at": datetime.now(timezone.utc).isoformat(),
+            },
             sections=sections,
         )
 
@@ -140,11 +278,18 @@ class TextLoader:
 
 
 def get_loader(source: str):
+    s = source.lower()
     if source.startswith(("http://", "https://")):
         return WebLoader(), "url"
-    elif source.lower().endswith(".pdf"):
+    elif s.endswith(".pdf"):
         return PDFLoader(), "file"
-    elif source.lower().endswith(".docx"):
+    elif s.endswith(".docx") or s.endswith(".doc"):
         return DocxLoader(), "file"
+    elif s.endswith(".csv"):
+        return CSVLoader(), "file"
+    elif s.endswith(".xlsx") or s.endswith(".xls"):
+        return ExcelLoader(), "file"
+    elif s.endswith(".txt"):
+        return TxtLoader(), "file"
     else:
-        raise ValueError(f"Unsupported: {source}. Use URL, .pdf, or .docx")
+        raise ValueError(f"Unsupported: {source}. Supported: URL, .pdf, .docx, .csv, .xlsx, .xls, .txt")
