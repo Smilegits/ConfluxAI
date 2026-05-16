@@ -6,7 +6,7 @@ Schema v2: documents store raw text; enriched text used only for embedding.
 from __future__ import annotations
 import logging
 import chromadb
-from openai import AzureOpenAI
+from openai import AzureOpenAI, OpenAI
 
 from config import settings
 from ingestion.loaders import get_loader, TextLoader, RawDocument
@@ -17,35 +17,44 @@ logger = logging.getLogger(__name__)
 _SCHEMA_VERSION = "2"
 
 # ── singleton clients ─────────────────────────────────────────────────────────
-_embed_client: AzureOpenAI | None = None
+_embed_client: OpenAI | None = None
 _collection: chromadb.Collection | None = None
 
 
-def _get_embed_client() -> AzureOpenAI:
+def _get_embed_client() -> OpenAI:
     global _embed_client
     if _embed_client is None:
-        _embed_client = AzureOpenAI(
-            api_key=settings.azure_api_key,
-            azure_endpoint=settings.azure_endpoint,
-            api_version=settings.azure_api_version,
-        )
+        if settings.llm_provider == "azure":
+            _embed_client = AzureOpenAI(
+                api_key=settings.azure_openai_api_key,
+                azure_endpoint=settings.azure_openai_endpoint,
+                api_version=settings.azure_openai_api_version,
+            )
+        else:
+            _embed_client = OpenAI(api_key=settings.openai_api_key)
     return _embed_client
 
 
 def get_embeddings(texts: list[str]) -> list[list[float]]:
-    """Embed a batch of texts using text-embedding-3-large via Azure OpenAI."""
+    """Embed a batch of texts using the configured provider."""
     client = _get_embed_client()
-    response = client.embeddings.create(
-        model=settings.azure_embedding_deployment,
-        input=texts,
+    model = (
+        settings.azure_openai_embedding_deployment
+        if settings.llm_provider == "azure"
+        else settings.openai_embedding_model
     )
+    response = client.embeddings.create(model=model, input=texts)
     return [item.embedding for item in response.data]
 
 
 def get_collection() -> chromadb.Collection:
     global _collection
     if _collection is None:
-        client = chromadb.PersistentClient(path=settings.chroma_dir)
+        import os
+        abs_path = os.path.abspath(settings.chroma_dir)
+        files = os.listdir(abs_path) if os.path.exists(abs_path) else ["<directory missing>"]
+        logger.debug("ChromaDB path: %s  contents: %s", abs_path, files)
+        client = chromadb.PersistentClient(path=abs_path)
         _collection = client.get_or_create_collection(
             name=settings.collection_name, metadata={"hnsw:space": "cosine"},
         )
@@ -57,19 +66,24 @@ def _migrate_schema_if_needed(col: chromadb.Collection) -> None:
     try:
         data = col.get(include=["metadatas"])
     except Exception:
+        logger.exception("Migration check failed — skipping")
         return
+    logger.debug("Migration check: %d total chunks in DB", len(data["ids"]))
     if not data["ids"]:
         return
     old_ids = [
         cid for cid, meta in zip(data["ids"], data["metadatas"] or [])
         if (meta or {}).get("schema_version", "1") != _SCHEMA_VERSION
     ]
+    logger.debug("Migration check: %d v1 (old) chunks, %d v2 (current) chunks",
+                 len(old_ids), len(data["ids"]) - len(old_ids))
     if old_ids:
         logger.warning(
             "Schema upgrade: removing %d v1 chunk(s). Re-run `python ingest.py` to rebuild the knowledge base.",
             len(old_ids),
         )
         col.delete(ids=old_ids)
+        logger.warning("Migration done. DB now has %d chunks.", col.count())
 
 
 # ── enrichment ───────────────────────────────────────────────────────────────
@@ -128,7 +142,7 @@ class IngestionPipeline:
                         "title": doc.metadata.get("title", source_key),
                     }
         except Exception:
-            pass
+            logger.warning("Content hash check failed — proceeding with full re-ingest", exc_info=True)
 
         chunks = self.chunker.chunk(doc)
         if not chunks:
@@ -168,7 +182,7 @@ class IngestionPipeline:
             if existing and existing["ids"]:
                 col.delete(ids=existing["ids"])
         except Exception:
-            pass
+            logger.exception("Failed to remove old chunks for source: %s", source_key)
 
     def list_sources(self) -> list[dict]:
         col = get_collection()
@@ -183,6 +197,7 @@ class IngestionPipeline:
                 sources[key]["chunks"] += 1
             return list(sources.values())
         except Exception:
+            logger.exception("list_sources failed")
             return []
 
     def delete_source(self, source_key: str):
@@ -192,4 +207,5 @@ class IngestionPipeline:
         try:
             return get_collection().count()
         except Exception:
+            logger.exception("total_chunks failed")
             return 0

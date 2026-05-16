@@ -1,19 +1,47 @@
 """
 CLI ingestion script.
-Reads data/web_urls.txt and all supported files in data/ → embeds → stores in ChromaDB.
+Reads data/urls.txt (or data/web_urls.txt) and all supported files in data/ → embeds → stores in ChromaDB.
 """
 from __future__ import annotations
 import argparse
 import logging
+import re
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 logging.basicConfig(level=logging.INFO, format="%(levelname)s  %(message)s")
 logger = logging.getLogger(__name__)
 
 SUPPORTED_EXTENSIONS = {".pdf", ".docx", ".doc", ".csv", ".txt", ".xlsx", ".xls"}
 DATA_DIR = Path("data")
-URLS_FILE = DATA_DIR / "web_urls.txt"
+URLS_FILES = (DATA_DIR / "urls.txt", DATA_DIR / "web_urls.txt")
+
+
+def _normalize_url(raw: str) -> str | None:
+    """Repair common URL entry errors; return clean URL or None if unrecognisable."""
+    url = raw.strip()
+    if not url:
+        return None
+
+    # Repair broken http/https scheme: htp://, htps://, https//, https:/ etc.
+    m = re.match(r"^(h[a-z]{1,5})([:/]{1,3})(.*)", url, re.IGNORECASE)
+    if m:
+        scheme = "https" if "s" in m.group(1).lower() else "http"
+        url = f"{scheme}://{m.group(3)}"
+    elif not re.match(r"^https?://", url, re.IGNORECASE):
+        # No recognisable scheme — prepend https://
+        url = "https://" + url
+
+    # Validate: netloc must exist, contain a dot, have no spaces
+    try:
+        parsed = urlparse(url)
+    except Exception:
+        return None
+    if not parsed.netloc or "." not in parsed.netloc or " " in parsed.netloc:
+        return None
+
+    return url
 
 
 def _log_result(r: dict, label: str) -> None:
@@ -33,13 +61,36 @@ def _log_result(r: dict, label: str) -> None:
 
 
 def load_urls() -> list[str]:
-    if not URLS_FILE.exists():
-        return []
-    urls = []
-    for line in URLS_FILE.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if line and not line.startswith("#"):
-            urls.append(line)
+    seen: dict[str, str] = {}  # dedup_key → first stored URL
+    urls: list[str] = []
+
+    for url_file in URLS_FILES:
+        if not url_file.exists():
+            continue
+        for lineno, raw in enumerate(url_file.read_text(encoding="utf-8").splitlines(), 1):
+            line = raw.strip()
+            if not line or line.startswith("#"):
+                continue
+
+            normalized = _normalize_url(line)
+            if normalized is None:
+                logger.warning("Skipping unrecognisable URL (%s line %d): %r", url_file.name, lineno, line)
+                continue
+
+            dedup_key = normalized.rstrip("/")
+            if dedup_key in seen:
+                logger.warning(
+                    "Duplicate URL skipped (%s line %d): %r — already seen as %r",
+                    url_file.name, lineno, line, seen[dedup_key],
+                )
+                continue
+
+            if normalized != line:
+                logger.info("URL normalised (%s line %d): %r → %r", url_file.name, lineno, line, normalized)
+
+            seen[dedup_key] = normalized
+            urls.append(normalized)
+
     return urls
 
 
@@ -48,7 +99,9 @@ def load_files() -> list[Path]:
         return []
     return [
         f for f in DATA_DIR.iterdir()
-        if f.is_file() and f.suffix.lower() in SUPPORTED_EXTENSIONS
+        if f.is_file()
+        and f.suffix.lower() in SUPPORTED_EXTENSIONS
+        and f.name not in {p.name for p in URLS_FILES}
     ]
 
 
@@ -56,7 +109,7 @@ def run(urls: list[str], files: list[Path]) -> None:
     from ingestion.pipeline import IngestionPipeline
 
     if not urls and not files:
-        logger.warning("Nothing to ingest. Add URLs to data/web_urls.txt or drop files in data/")
+        logger.warning("Nothing to ingest. Add URLs to data/urls.txt or drop files in data/")
         sys.exit(0)
 
     pipeline = IngestionPipeline()
@@ -92,7 +145,7 @@ def run(urls: list[str], files: list[Path]) -> None:
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Ingest data into RAG ChromaDB store")
-    parser.add_argument("--url", metavar="URL", nargs="*", help="Extra URLs to ingest (in addition to web_urls.txt)")
+    parser.add_argument("--url", metavar="URL", nargs="*", help="Extra URLs to ingest (in addition to urls.txt / web_urls.txt)")
     parser.add_argument("--file", metavar="FILE", nargs="*", help="Extra files to ingest (in addition to data/ folder)")
     parser.add_argument("--urls-only", action="store_true", help="Skip files, only process URLs")
     parser.add_argument("--files-only", action="store_true", help="Skip URLs, only process files")

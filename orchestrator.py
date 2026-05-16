@@ -77,9 +77,16 @@ CONFIDENCE_NOTES = {
     Confidence.LOW: "The context has low relevance. Only answer if you find directly relevant info, otherwise say you don't have enough information.",
 }
 
-INTENT_PROMPT = """Classify intent. Categories: FACTUAL, COMPARISON, FOLLOW_UP, CLARIFY, OUT_OF_SCOPE, GREETING.
-Context: {context}
-User: {query}
+INTENT_PROMPT = """Classify the user query intent. Categories:
+- FACTUAL: any question about a topic, product, feature, data, or concept
+- COMPARISON: comparing two or more things
+- FOLLOW_UP: refers to previous conversation turn (uses "it", "that", "they", etc.)
+- CLARIFY: asking for clarification of a previous answer
+- GREETING: pure greeting with no question (hi, hello, good morning)
+- OUT_OF_SCOPE: clearly personal/unrelated requests (jokes, weather, cooking, etc.) — use sparingly, default to FACTUAL if unsure
+
+Conversation context: {context}
+User query: {query}
 Respond with ONLY the category name."""
 
 REWRITE_PROMPT = """Rewrite as a self-contained search query using conversation context. If already clear, return unchanged.
@@ -116,6 +123,7 @@ class Orchestrator:
 
         # 1. classify intent
         intent = self._classify(user_msg, conv_ctx)
+        logger.info("intent=%s query=%r", intent, user_msg)
 
         # 2. short-circuit
         if intent == Intent.GREETING:
@@ -133,15 +141,25 @@ class Orchestrator:
 
         # 3. rewrite
         query = self._rewrite(user_msg, conv_ctx) if intent == Intent.FOLLOW_UP else user_msg
+        if query != user_msg:
+            logger.info("rewritten query=%r", query)
 
         # 4. retrieve
         results = hybrid_retrieve(query)
+        logger.info("retrieve returned %d results, top_score=%.3f",
+                    len(results), results[0].score if results else 0.0)
 
         # 5. confidence
         conf = self._assess_confidence(results)
+        logger.info("confidence=%s", conf)
 
         # 6. fallback on NONE
         if conf == Confidence.NONE:
+            logger.warning(
+                "NONE confidence — top_score=%.4f threshold=%.4f — no answer returned",
+                results[0].score if results else 0.0,
+                settings.similarity_threshold,
+            )
             return OrchestratorResult(
                 response="I don't have enough information in my knowledge base to answer that. Could you rephrase, or ask about a topic covered in my sources?",
                 confidence=conf, intent=intent.value, rewritten_query=query,
@@ -149,7 +167,14 @@ class Orchestrator:
             )
 
         # 7. assemble context
+        logger.debug("--- Retrieved chunks ---")
+        for i, r in enumerate(results, 1):
+            src = r.metadata.get("title", r.metadata.get("source", "?"))
+            sec = r.metadata.get("section_title", "")
+            preview = (r.text[:120] + "…") if len(r.text) > 120 else r.text
+            logger.debug("  [%d] score=%.4f src=%s sec=%s | %s", i, r.score, src, sec, preview)
         context = self._assemble_context(results)
+        logger.debug("--- Context sent to LLM (%d chars) ---\n%s", len(context), context)
 
         # 8. generate
         system = SYSTEM_PROMPT.format(
@@ -188,6 +213,11 @@ class Orchestrator:
         conf = self._assess_confidence(results)
 
         if conf == Confidence.NONE:
+            logger.warning(
+                "NONE confidence — top_score=%.4f threshold=%.4f — no answer returned",
+                results[0].score if results else 0.0,
+                settings.similarity_threshold,
+            )
             msg = "I don't have enough information in my knowledge base to answer that. Could you rephrase, or ask about a topic covered in my sources?"
             yield msg
             yield OrchestratorResult(
@@ -197,7 +227,14 @@ class Orchestrator:
             )
             return
 
+        logger.debug("--- Retrieved chunks ---")
+        for i, r in enumerate(results, 1):
+            src = r.metadata.get("title", r.metadata.get("source", "?"))
+            sec = r.metadata.get("section_title", "")
+            preview = (r.text[:120] + "…") if len(r.text) > 120 else r.text
+            logger.debug("  [%d] score=%.4f src=%s sec=%s | %s", i, r.score, src, sec, preview)
         context = self._assemble_context(results)
+        logger.debug("--- Context sent to LLM (%d chars) ---\n%s", len(context), context)
         system = SYSTEM_PROMPT.format(
             confidence_note=CONFIDENCE_NOTES.get(conf, ""), context=context,
         )
@@ -227,6 +264,7 @@ class Orchestrator:
             ).strip().upper().replace(" ", "_")
             return Intent(resp.lower()) if resp.lower() in Intent._value2member_map_ else Intent.FACTUAL
         except Exception:
+            logger.exception("Intent classify failed — defaulting to FACTUAL")
             return Intent.FACTUAL
 
     def _rewrite(self, query: str, ctx: str) -> str:
@@ -237,6 +275,7 @@ class Orchestrator:
             ).strip()
             return r or query
         except Exception:
+            logger.exception("Query rewrite failed — using original query")
             return query
 
     @staticmethod
@@ -249,13 +288,13 @@ class Orchestrator:
             return Confidence.NONE
         if top < settings.low_confidence_threshold:
             return Confidence.LOW
-        if avg > settings.low_confidence_threshold:
+        if top >= settings.low_confidence_threshold and avg > settings.low_confidence_threshold:
             return Confidence.HIGH
         return Confidence.MEDIUM
 
     @staticmethod
     def _assemble_context(results: list[SearchResult]) -> str:
-        results_sorted = sorted(results, key=lambda r: r.score)  # least relevant first
+        results_sorted = sorted(results, key=lambda r: r.score, reverse=True)  # most relevant first
         blocks, tokens = [], 0
         for i, r in enumerate(results_sorted, 1):
             text = r.parent_text if r.parent_text else r.text

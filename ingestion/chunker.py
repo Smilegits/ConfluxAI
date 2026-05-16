@@ -68,7 +68,7 @@ class Chunker:
             current.append(sent)
             cur_tok += st
 
-        if current and _approx_tokens(" ".join(current)) >= settings.min_chunk_size:
+        if current and len(current) > 0 and _approx_tokens(" ".join(current)) >= settings.min_chunk_size:
             chunks.append(self._make(current, heading, base_meta))
         return chunks
 

@@ -7,6 +7,7 @@ Hybrid retrieval engine combining:
 """
 from __future__ import annotations
 import logging
+import math
 import re
 from dataclasses import dataclass, field
 
@@ -70,6 +71,7 @@ def _get_bm25_index() -> tuple[list, BM25Okapi | None]:
     count = col.count()
 
     if _bm25_cache is not None and _bm25_cache["count"] == count and count > 0:
+        logger.debug("BM25 cache hit (count=%d)", count)
         return _bm25_cache["corpus"], _bm25_cache["bm25"]
 
     data = col.get(include=["documents", "metadatas"])
@@ -92,6 +94,7 @@ def _get_bm25_index() -> tuple[list, BM25Okapi | None]:
 
     bm25 = BM25Okapi(tokenized)
     _bm25_cache = {"count": count, "corpus": corpus, "bm25": bm25}
+    logger.info("BM25 index rebuilt (%d docs)", len(corpus))
     return corpus, bm25
 
 
@@ -102,7 +105,7 @@ def keyword_search(query: str, top_k: int = 10) -> list[SearchResult]:
 
     qtokens = WORD_RE.findall(query.lower())
     scores = bm25.get_scores(qtokens)
-    mx = max(scores) if max(scores) > 0 else 1.0
+    mx = max(scores) if len(scores) > 0 and max(scores) > 0 else 1.0
 
     top_idx = sorted(range(len(scores)), key=lambda i: scores[i], reverse=True)[:top_k]
     results = []
@@ -130,10 +133,12 @@ def rrf_fuse(lists: list[list[SearchResult]], k: int = 60) -> list[SearchResult]
             if r.chunk_id not in best or r.score > best[r.chunk_id].score:
                 best[r.chunk_id] = r
     ordered = sorted(scores, key=lambda cid: scores[cid], reverse=True)
+    # Normalize to 0-1: max possible score = n_lists / (k+1)
+    max_possible = len(lists) / (k + 1)
     merged = []
     for cid in ordered:
         r = best[cid]
-        r.score = scores[cid]
+        r.score = scores[cid] / max_possible if max_possible > 0 else scores[cid]
         merged.append(r)
     return merged
 
@@ -149,6 +154,7 @@ def _get_reranker():
             from sentence_transformers import CrossEncoder
             _reranker = CrossEncoder("cross-encoder/ms-marco-MiniLM-L-6-v2")
         except Exception:
+            logger.warning("Cross-encoder reranker failed to load — reranking disabled", exc_info=True)
             _reranker = False
     return _reranker if _reranker is not False else None
 
@@ -160,7 +166,7 @@ def rerank(query: str, results: list[SearchResult], top_k: int) -> list[SearchRe
     pairs = [(query, r.text) for r in results]
     sc = model.predict(pairs)
     for r, s in zip(results, sc):
-        r.score = float(s)
+        r.score = 1.0 / (1.0 + math.exp(-float(s)))  # sigmoid → 0-1
     results.sort(key=lambda r: r.score, reverse=True)
     return results[:top_k]
 
@@ -181,5 +187,12 @@ def hybrid_retrieve(
     fused = rrf_fuse([vec, kw], k=settings.rrf_k)
 
     if use_reranker and len(fused) > fk:
-        return rerank(query, fused, top_k=fk)
+        # Save RRF scores before reranker overwrites them.
+        # Cross-encoder scores tabular/structured data poorly (trained on prose),
+        # so confidence is assessed on RRF scores, not cross-encoder scores.
+        rrf_scores = {r.chunk_id: r.score for r in fused}
+        reranked = rerank(query, fused, top_k=fk)
+        for r in reranked:
+            r.score = rrf_scores.get(r.chunk_id, r.score)
+        return reranked
     return fused[:fk]

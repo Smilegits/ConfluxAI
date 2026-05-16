@@ -53,6 +53,8 @@ class SessionStore:
         self._client = MongoClient(settings.mongodb_uri, serverSelectionTimeoutMS=3000)
         db = self._client[settings.mongodb_db]
         self._col: Collection = db["chat_sessions"]
+        # Ping forces connection — raises immediately if MongoDB unreachable
+        self._client.admin.command("ping")
         self._col.create_index([("updated_at", ASCENDING)])
 
     def load_all(self) -> dict[str, dict]:

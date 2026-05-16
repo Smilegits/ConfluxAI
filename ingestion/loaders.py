@@ -47,6 +47,12 @@ class WebLoader:
         full_text = "\n\n".join(
             (f"## {s['heading']}\n{s['text']}" if s["heading"] else s["text"]) for s in sections
         )
+        if len(full_text.strip()) < 200:
+            raise ValueError(
+                f"Page returned too little text ({len(full_text.strip())} chars) — "
+                "likely requires JavaScript rendering. "
+                f"Try ingesting https://r.jina.ai/{url} instead."
+            )
         return RawDocument(
             text=full_text,
             metadata={
@@ -205,11 +211,19 @@ class ExcelLoader:
             if not raw_rows:
                 continue
 
+            # If first row is a title/merged row (≥50% empty cells), skip it
+            # and use next row as headers
+            def _is_title_row(r: list) -> bool:
+                non_empty = sum(1 for c in r if c)
+                return len(r) > 1 and non_empty <= max(1, len(r) // 2)
+
+            if _is_title_row(raw_rows[0]) and len(raw_rows) > 1:
+                raw_rows = raw_rows[1:]
+
             headers = raw_rows[0]
             data_rows = raw_rows[1:] if len(raw_rows) > 1 else []
             if not data_rows:
-                # Single-row sheet — treat as header-only, emit as-is
-                sections.append({"heading": sheet_name, "text": " | ".join(headers)})
+                sections.append({"heading": sheet_name, "text": " | ".join(h for h in headers if h)})
                 continue
 
             for i in range(0, len(data_rows), self._GROUP_SIZE):
@@ -217,7 +231,11 @@ class ExcelLoader:
                 lines = []
                 for row in batch:
                     if len(headers) == len(row):
-                        parts = [f"{h}: {v}" for h, v in zip(headers, row) if v]
+                        # Skip pairs where header is empty — use value alone
+                        parts = [
+                            f"{h}: {v}" if h else v
+                            for h, v in zip(headers, row) if v
+                        ]
                     else:
                         parts = [v for v in row if v]
                     if parts:
@@ -228,6 +246,7 @@ class ExcelLoader:
                 heading = f"{sheet_name} — rows {i + 2}–{end_row + 1}"
                 sections.append({"heading": heading, "text": "\n".join(lines)})
 
+        sheet_count = len(wb.sheetnames)  # read before close
         wb.close()
 
         full_text = "\n\n".join(
@@ -240,7 +259,7 @@ class ExcelLoader:
                 "source_type": "excel",
                 "source": path,
                 "title": Path(path).stem,
-                "sheets": len(wb.sheetnames),
+                "sheets": sheet_count,
                 "ingested_at": datetime.now(timezone.utc).isoformat(),
             },
             sections=sections,

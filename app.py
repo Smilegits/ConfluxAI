@@ -4,12 +4,39 @@ RAG Chatbot — Streamlit UI
 Run with:  streamlit run app.py
 Ingest data first:  python ingest.py
 """
+import logging
+import threading
+import time
+import traceback
 import uuid
 import streamlit as st
 from ingestion.pipeline import IngestionPipeline
 from llm_client import LLMClient
 from orchestrator import Orchestrator, Confidence, CONF_META, OrchestratorResult
 from session_store import SessionStore
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s %(levelname)-8s %(name)s — %(message)s",
+    datefmt="%H:%M:%S",
+)
+logger = logging.getLogger(__name__)
+
+# ── Background warm-up ────────────────────────────────────────────────────────
+_warmup_status: dict = {}          # module-level: persists across Streamlit reruns
+_warmup_thread: threading.Thread | None = None
+
+
+def _run_warmup() -> None:
+    from retrieval.engine import _get_bm25_index, _get_reranker
+    for key, fn in [("bm25", _get_bm25_index), ("reranker", _get_reranker)]:
+        try:
+            fn()
+            _warmup_status[key] = "ready"
+            logger.info("Warm-up done: %s", key)
+        except Exception:
+            logger.warning("Warm-up failed: %s", key, exc_info=True)
+            _warmup_status[key] = "failed"
 
 
 # ── Page config ───────────────────────────────────────────────────────────────
@@ -80,18 +107,46 @@ def _new_session_id() -> str:
 
 def init_state():
     if "pipeline" not in st.session_state:
-        st.session_state.pipeline = IngestionPipeline()
+        logger.info("Initialising IngestionPipeline...")
+        try:
+            st.session_state.pipeline = IngestionPipeline()
+            logger.info("IngestionPipeline ready. Chunks in DB: %d", st.session_state.pipeline.total_chunks())
+        except Exception:
+            logger.exception("IngestionPipeline init failed")
+            st.error(f"ChromaDB init failed:\n```\n{traceback.format_exc()}\n```")
+            st.stop()
 
     if "orchestrator" not in st.session_state:
-        llm = LLMClient()
-        st.session_state.orchestrator = Orchestrator(llm)
+        logger.info("Initialising LLMClient + Orchestrator...")
+        try:
+            llm = LLMClient()
+            st.session_state.orchestrator = Orchestrator(llm)
+            logger.info("Orchestrator ready (model=%s)", llm.model)
+        except Exception:
+            logger.exception("LLMClient/Orchestrator init failed")
+            st.error(f"LLM init failed:\n```\n{traceback.format_exc()}\n```")
+            st.stop()
+
+    global _warmup_thread
+    if _warmup_thread is None:
+        _warmup_status.update({"bm25": "loading", "reranker": "loading"})
+        _warmup_thread = threading.Thread(target=_run_warmup, daemon=True)
+        _warmup_thread.start()
+        logger.info("Background warm-up started (BM25 + reranker)")
 
     if "store" not in st.session_state:
-        st.session_state.store = SessionStore()
+        logger.info("Initialising SessionStore...")
+        try:
+            st.session_state.store = SessionStore()
+            logger.info("SessionStore ready")
+        except Exception:
+            logger.exception("SessionStore init failed")
+            st.warning(f"MongoDB unavailable — sessions won't persist:\n```\n{traceback.format_exc()}\n```")
+            st.session_state.store = None
 
     # Load sessions from MongoDB on first run
     if "sessions" not in st.session_state:
-        loaded = st.session_state.store.load_all()
+        loaded = st.session_state.store.load_all() if st.session_state.store else {}
         if loaded:
             st.session_state.sessions = loaded
             st.session_state.current_session = next(iter(loaded))
@@ -100,7 +155,8 @@ def init_state():
             first_session = {"name": "Chat 1", "messages": []}
             st.session_state.sessions = {first_id: first_session}
             st.session_state.current_session = first_id
-            st.session_state.store.save(first_id, first_session)
+            if st.session_state.store:
+                st.session_state.store.save(first_id, first_session)
 
     if "current_session" not in st.session_state:
         st.session_state.current_session = next(iter(st.session_state.sessions))
@@ -136,7 +192,8 @@ with st.sidebar:
             new_id = _new_session_id()
             new_sess = {"name": f"Chat {len(sessions) + 1}", "messages": []}
             sessions[new_id] = new_sess
-            store.save(new_id, new_sess)
+            if store:
+                store.save(new_id, new_sess)
             st.session_state.current_session = new_id
             st.rerun()
 
@@ -152,7 +209,8 @@ with st.sidebar:
             if len(sessions) > 1:
                 if st.button("✕", key=f"del_sess_{sid}", help="Delete session"):
                     del sessions[sid]
-                    store.delete(sid)
+                    if store:
+                        store.delete(sid)
                     if is_active:
                         st.session_state.current_session = next(iter(sessions))
                     st.rerun()
@@ -169,11 +227,13 @@ with st.sidebar:
     )
     if new_name and new_name != current_session["name"]:
         current_session["name"] = new_name
-        store.save(current_id, current_session)
+        if store:
+            store.save(current_id, current_session)
 
     if st.button("🧹 Clear Chat", use_container_width=True, disabled=not current_session["messages"]):
         current_session["messages"] = []
-        store.save(current_id, current_session)
+        if store:
+            store.save(current_id, current_session)
         st.rerun()
 
     st.markdown("---")
@@ -205,6 +265,15 @@ with st.sidebar:
                 <div class="source-title">{type_icon} {src['title']}</div>
                 <div class="source-meta">{src['chunks']} chunks · {src['type']}</div>
             </div>""", unsafe_allow_html=True)
+
+    st.markdown("---")
+
+    # ── System status ─────────────────────────────────────────────────────────
+    st.markdown("### ⚙️ System")
+    _si = {"loading": ("🟡", "Loading…"), "ready": ("🟢", "Ready"), "failed": ("🔴", "Failed")}
+    for component, label in [("bm25", "BM25 Index"), ("reranker", "Reranker")]:
+        icon, text = _si.get(_warmup_status.get(component, "loading"), ("🟡", "Loading…"))
+        st.markdown(f"{icon} **{label}** — {text}")
 
 
 # ── Main: Chat Interface ──────────────────────────────────────────────────────
@@ -277,8 +346,10 @@ if prompt := st.chat_input(f"Ask a question… ({current_session['name']})"):
                             st.markdown(f"- **{s['title']}** — {s.get('section', '')} *(score: {s['score']})*")
 
         except Exception as e:
+            tb = traceback.format_exc()
+            logger.exception("Chat processing failed for prompt: %r", prompt)
             full_response = f"Error: {e}"
-            placeholder.error(full_response)
+            placeholder.error(f"**Error:** {e}\n\n```\n{tb}\n```")
             meta_result = OrchestratorResult(response=full_response, confidence=Confidence.NONE)
 
     messages.append({
@@ -286,4 +357,10 @@ if prompt := st.chat_input(f"Ask a question… ({current_session['name']})"):
         "content": full_response,
         "meta": meta_result,
     })
-    store.save(current_id, current_session)
+    if store:
+        store.save(current_id, current_session)
+
+# Auto-refresh until warm-up complete (polls at 0.75s intervals)
+if not all(v in ("ready", "failed") for v in _warmup_status.values()):
+    time.sleep(0.75)
+    st.rerun()
