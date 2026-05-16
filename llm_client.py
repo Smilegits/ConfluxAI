@@ -35,7 +35,7 @@ class LLMClient:
     def generate(self, user_msg: str, system: str = "", max_tokens: int | None = None) -> str:
         resp = self.client.chat.completions.create(
             model=self.model,
-            max_tokens=max_tokens or settings.max_tokens,
+            max_completion_tokens=max_tokens or settings.max_tokens,
             temperature=settings.temperature,
             messages=[
                 {"role": "system", "content": system or "You are a helpful assistant."},
@@ -51,7 +51,7 @@ class LLMClient:
         ]
         resp = self.client.chat.completions.create(
             model=self.model,
-            max_tokens=settings.max_tokens,
+            max_completion_tokens=settings.max_tokens,
             temperature=settings.temperature,
             messages=full_messages,
         )
@@ -64,7 +64,7 @@ class LLMClient:
         ]
         stream = self.client.chat.completions.create(
             model=self.model,
-            max_tokens=settings.max_tokens,
+            max_completion_tokens=settings.max_tokens,
             temperature=settings.temperature,
             messages=full_messages,
             stream=True,
