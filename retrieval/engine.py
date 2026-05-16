@@ -143,7 +143,7 @@ def rrf_fuse(lists: list[list[SearchResult]], k: int = 60) -> list[SearchResult]
     return merged
 
 
-# ── Cross-encoder reranker ───────────────────────────────────────────────────
+# ── Cross-encoder reranker (local HuggingFace) ───────────────────────────────
 _reranker = None
 
 
@@ -159,9 +159,9 @@ def _get_reranker():
     return _reranker if _reranker is not False else None
 
 
-def rerank(query: str, results: list[SearchResult], top_k: int) -> list[SearchResult]:
+def _crossencoder_rerank(query: str, results: list[SearchResult], top_k: int) -> list[SearchResult]:
     model = _get_reranker()
-    if not model or not results:
+    if not model:
         return results[:top_k]
     pairs = [(query, r.text) for r in results]
     sc = model.predict(pairs)
@@ -169,6 +169,59 @@ def rerank(query: str, results: list[SearchResult], top_k: int) -> list[SearchRe
         r.score = 1.0 / (1.0 + math.exp(-float(s)))  # sigmoid → 0-1
     results.sort(key=lambda r: r.score, reverse=True)
     return results[:top_k]
+
+
+# ── LLM reranker (uses configured provider) ──────────────────────────────────
+_llm_rerank_client = None
+
+
+def _get_llm_rerank_client():
+    global _llm_rerank_client
+    if _llm_rerank_client is None:
+        try:
+            from llm_client import LLMClient
+            _llm_rerank_client = LLMClient()
+        except Exception:
+            logger.warning("LLM rerank client init failed — reranking disabled", exc_info=True)
+            _llm_rerank_client = False
+    return _llm_rerank_client if _llm_rerank_client is not False else None
+
+
+def _llm_rerank(query: str, results: list[SearchResult], top_k: int) -> list[SearchResult]:
+    llm = _get_llm_rerank_client()
+    if not llm:
+        return results[:top_k]
+
+    passages = "\n\n".join(f"[{i+1}] {r.text[:400]}" for i, r in enumerate(results))
+    prompt = (
+        f"Query: {query}\n\n"
+        f"Passages:\n{passages}\n\n"
+        f"Rank these {len(results)} passages from most to least relevant to the query. "
+        f"Return ONLY a comma-separated list of passage numbers. Example: 3,1,4,2"
+    )
+    try:
+        resp = llm.generate(
+            prompt,
+            system="You are a relevance ranking assistant. Return only comma-separated passage numbers.",
+            max_tokens=60,
+        ).strip()
+        indices = [int(x.strip()) - 1 for x in resp.split(",") if x.strip().isdigit()]
+        # Validate and fill any missing indices
+        valid = [i for i in indices if 0 <= i < len(results)]
+        seen = set(valid)
+        for i in range(len(results)):
+            if i not in seen:
+                valid.append(i)
+        return [results[i] for i in valid[:top_k]]
+    except Exception:
+        logger.warning("LLM rerank failed — using RRF order", exc_info=True)
+        return results[:top_k]
+
+
+def rerank(query: str, results: list[SearchResult], top_k: int) -> list[SearchResult]:
+    if settings.reranker_type == "llm":
+        return _llm_rerank(query, results, top_k)
+    return _crossencoder_rerank(query, results, top_k)
 
 
 # ── Main entry point ─────────────────────────────────────────────────────────

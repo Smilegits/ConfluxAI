@@ -25,6 +25,9 @@ class Settings:
     # Provider: "openai" or "azure"
     llm_provider: str = field(default_factory=lambda: os.getenv("LLM_PROVIDER", "openai").lower())
 
+    # Reranker: "llm" (uses configured LLM) or "crossencoder" (local HuggingFace model)
+    reranker_type: str = field(default_factory=lambda: os.getenv("RERANKER_TYPE", "llm").lower())
+
     # LLM — OpenAI
     openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
     openai_model: str = field(default_factory=lambda: os.getenv("OPENAI_MODEL", "gpt-4o"))

@@ -28,8 +28,13 @@ _warmup_thread: threading.Thread | None = None
 
 
 def _run_warmup() -> None:
-    from retrieval.engine import _get_bm25_index, _get_reranker
-    for key, fn in [("bm25", _get_bm25_index), ("reranker", _get_reranker)]:
+    from config import settings
+    from retrieval.engine import _get_bm25_index, _get_llm_rerank_client, _get_reranker
+
+    reranker_fn = (
+        _get_llm_rerank_client if settings.reranker_type == "llm" else _get_reranker
+    )
+    for key, fn in [("bm25", _get_bm25_index), ("reranker", reranker_fn)]:
         try:
             fn()
             _warmup_status[key] = "ready"
