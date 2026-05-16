@@ -51,6 +51,7 @@ def get_collection() -> chromadb.Collection:
     global _collection
     if _collection is None:
         import os
+        os.environ["ANONYMIZED_TELEMETRY"] = "False"
         abs_path = os.path.abspath(settings.chroma_dir)
         files = os.listdir(abs_path) if os.path.exists(abs_path) else ["<directory missing>"]
         logger.debug("ChromaDB path: %s  contents: %s", abs_path, files)
