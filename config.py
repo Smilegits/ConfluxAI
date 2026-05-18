@@ -30,6 +30,9 @@ class Settings:
 
     # Web loader
     use_playwright_requests: bool = field(default_factory=lambda: os.getenv("USE_PLAYWRIGHT_REQUESTS", "false").lower() == "true")
+    # SSL verification: True = verify (default), False = disable (corp proxy bypass),
+    # or set REQUESTS_CA_BUNDLE=/path/to/corp-ca.crt to use custom CA cert
+    web_ssl_verify: bool = field(default_factory=lambda: os.getenv("WEB_SSL_VERIFY", "true").lower() != "false")
 
     # LLM — OpenAI
     openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))

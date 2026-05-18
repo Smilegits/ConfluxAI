@@ -1,0 +1,31 @@
+# Web URLs for Data Extraction
+# Add one URL per line. Lines starting with # are comments and will be ignored.
+# Supported: any public webpage, article, blog, docs site, etc.
+
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/prerequisites-fusion-erp-analytics.html#GUID-9500DE59-BD65-4F0D-A7AD-326FB60E7253
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/offerings-functional-areas---erp.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/make-preview-features-available.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/prerequisites-fusion-erp-analytics.html#GUID-9500DE59-BD65-4F0D-A7AD-326FB60E7253
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/offerings-functional-areas---erp.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/make-preview-features-available.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/enable-generally-available-features.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/pipeline-parameters1.html#GUID-BBD1BBF6-9C2A-4343-981D-B0B759FC3C82
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/create-data-pipeline-functional-area.html#GUID-2F0E71BA-43A1-4F77-B31C-C7C491895646
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/edit-data-pipeline-functional-area.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/activate-data-pipeline-functional-area.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/global-parameters.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/global-report-parameters.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/reporting-configuration-enterprise-resource-planning.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/reporting-configurations-enterprise-resource-planning.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/deactivate-data-pipeline-functional-area.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/delete-data-pipeline-functional-area.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/refresh-data-pipeline-functional-area.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/reload-data-data-pipeline.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/view-request-history.html#GUID-F8CB42A3-F316-41AB-B596-7054392A79F1
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/request-types-statuses.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/view-audit-log.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/select-descriptive-flex-fields-map-attributes.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/activate-descriptive-flex-fields.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/fawag/deactivate-descriptive-flex-fields.html
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/configurable-account-analysis.html#GUID-2B6FB331-FB88-485E-9A8B-802F1B95B40E
+https://docs.oracle.com/en/cloud/saas/analytics/26r1/faiae/fusion-accounting-hub-analytics.html#GUID-C678D7E8-7CFB-4188-A8E1-51831546C993
