@@ -28,6 +28,9 @@ class Settings:
     # Reranker: "llm" (uses configured LLM) or "crossencoder" (local HuggingFace model)
     reranker_type: str = field(default_factory=lambda: os.getenv("RERANKER_TYPE", "llm").lower())
 
+    # Web loader
+    use_playwright_requests: bool = field(default_factory=lambda: os.getenv("USE_PLAYWRIGHT_REQUESTS", "false").lower() == "true")
+
     # LLM — OpenAI
     openai_api_key: str = field(default_factory=lambda: os.getenv("OPENAI_API_KEY", ""))
     openai_model: str = field(default_factory=lambda: os.getenv("OPENAI_MODEL", "gpt-4o"))

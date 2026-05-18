@@ -1,6 +1,9 @@
 # UI
 streamlit>=1.35.0
 
+# Web scraping (proxy-aware, no browser)
+playwright>=1.40.0
+
 # LLM
 openai>=1.40.0
 
@@ -8,7 +11,7 @@ openai>=1.40.0
 sentence-transformers>=3.0.0
 
 # Vector DB
-chromadb==0.5.23
+chromadb>=0.6.0
 
 # Keyword search
 rank-bm25>=0.2.2

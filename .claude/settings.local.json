@@ -4,7 +4,26 @@
       "Bash(curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.1/install.sh)",
       "Bash(bash)",
       "Bash(git init *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(python3 *)",
+      "Bash(sudo apt *)",
+      "Bash(py *)",
+      "Bash(python3.10 -c ' *)",
+      "Bash(python3.10 -c \"import ast; ast.parse\\(open\\('app.py'\\).read\\(\\)\\); print\\('OK'\\)\")",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git commit *)",
+      "Bash(pip show *)",
+      "Bash(pip index *)",
+      "Bash(pip install *)",
+      "WebSearch",
+      "Read(//mnt/c/Windows/**)",
+      "Read(//mnt/c/Windows/System32/**)",
+      "Bash(.venv-wsl/bin/python3 *)",
+      "Bash(.venv-wsl/bin/pip list *)",
+      "Bash(npx graphify *)",
+      "Bash(graphify --version)",
+      "Bash(git *)"
     ]
   }
 }

@@ -37,9 +37,11 @@ class Chunker:
         for section in sections:
             heading = section.get("heading", "")
             text = section.get("text", "")
+            anchor = section.get("anchor", "")
             if not text.strip():
                 continue
-            section_chunks = self._chunk_section(text, heading, doc.metadata)
+            meta = {**doc.metadata, "anchor": anchor} if anchor else doc.metadata
+            section_chunks = self._chunk_section(text, heading, meta)
             parent = (f"{heading}\n{text}" if heading else text).strip()
             for c in section_chunks:
                 c.parent_text = parent

@@ -6,6 +6,7 @@ from __future__ import annotations
 import csv
 import hashlib
 import logging
+import os
 import re
 from dataclasses import dataclass, field
 from datetime import datetime, timezone
@@ -34,6 +35,7 @@ class RawDocument:
 
 class WebLoader:
     STRIP_TAGS = {"nav", "footer", "header", "aside", "script", "style", "noscript", "form"}
+    _NAV_RE = re.compile(r'(Previous|Next)\s*$', re.MULTILINE)
 
     def load(self, url: str) -> RawDocument:
         resp = requests.get(url, timeout=15, headers={"User-Agent": "RAGBot/1.0"})
@@ -65,20 +67,101 @@ class WebLoader:
         )
 
     def _extract_sections(self, el) -> list[dict]:
-        sections, heading, parts = [], "", []
+        sections, heading, anchor, parts = [], "", "", []
         for child in el.descendants:
             if child.name and child.name in ("h1", "h2", "h3", "h4", "h5", "h6"):
                 if parts:
-                    sections.append({"heading": heading, "text": " ".join(parts).strip()})
+                    sections.append({
+                        "heading": heading,
+                        "anchor": anchor,
+                        "text": self._clean(" ".join(parts).strip()),
+                    })
                     parts = []
                 heading = child.get_text(strip=True)
+                anchor = child.get("id", "") or ""
             elif isinstance(child, NavigableString):
                 t = child.strip()
                 if t and child.parent.name not in ("h1", "h2", "h3", "h4", "h5", "h6"):
                     parts.append(t)
         if parts:
-            sections.append({"heading": heading, "text": " ".join(parts).strip()})
+            sections.append({
+                "heading": heading,
+                "anchor": anchor,
+                "text": self._clean(" ".join(parts).strip()),
+            })
         return sections
+
+    @classmethod
+    def _clean(cls, text: str) -> str:
+        text = re.sub(r'\n{3,}', '\n\n', text)
+        text = re.sub(r'[ \t]{2,}', ' ', text)
+        text = cls._NAV_RE.sub('', text)
+        return text.strip()
+
+
+class PlaywrightWebLoader(WebLoader):
+    """Playwright HTTP-only loader — no browser, works behind corp proxy.
+    Activate with USE_PLAYWRIGHT_REQUESTS=true in .env.
+    Requires: pip install playwright && playwright install chromium
+    Proxy: set HTTP_PROXY / HTTPS_PROXY env vars (Playwright picks them up automatically).
+    """
+
+    def load(self, url: str) -> RawDocument:
+        try:
+            from playwright.sync_api import sync_playwright
+        except ImportError:
+            raise ImportError(
+                "playwright not installed: pip install playwright && playwright install chromium"
+            )
+
+        try:
+            import certifi
+            os.environ.setdefault("SSL_CERT_FILE", certifi.where())
+            os.environ.setdefault("REQUESTS_CA_BUNDLE", certifi.where())
+        except ImportError:
+            pass  # ignore_https_errors covers corp proxy MITM without certifi
+
+        parsed = urlparse(url)
+        base_url = f"{parsed.scheme}://{parsed.netloc}"
+        path = url[len(base_url):] or "/"
+
+        with sync_playwright() as p:
+            ctx = p.request.new_context(
+                base_url=base_url,
+                ignore_https_errors=True,
+                extra_http_headers={"User-Agent": "RAGBot/1.0"},
+            )
+            try:
+                resp = ctx.get(path)
+                html = resp.text()
+            finally:
+                ctx.dispose()
+
+        soup = BeautifulSoup(html, "html.parser")
+        for tag in soup.find_all(self.STRIP_TAGS):
+            tag.decompose()
+
+        main = soup.find("main") or soup.find("article") or soup.find("body") or soup
+        sections = self._extract_sections(main)
+        full_text = "\n\n".join(
+            (f"## {s['heading']}\n{s['text']}" if s["heading"] else s["text"]) for s in sections
+        )
+        if len(full_text.strip()) < 200:
+            raise ValueError(
+                f"Page returned too little text ({len(full_text.strip())} chars) — "
+                "page may require JavaScript rendering. "
+                f"Try ingesting https://r.jina.ai/{url} instead."
+            )
+        return RawDocument(
+            text=full_text,
+            metadata={
+                "source_type": "web",
+                "source": url,
+                "title": (soup.title.string.strip() if soup.title and soup.title.string else parsed.netloc),
+                "ingested_at": datetime.now(timezone.utc).isoformat(),
+            },
+            sections=sections,
+        )
 
 
 class PDFLoader:
@@ -299,6 +382,9 @@ class TextLoader:
 def get_loader(source: str):
     s = source.lower()
     if source.startswith(("http://", "https://")):
+        from config import settings
+        if settings.use_playwright_requests:
+            return PlaywrightWebLoader(), "url"
         return WebLoader(), "url"
     elif s.endswith(".pdf"):
         return PDFLoader(), "file"
