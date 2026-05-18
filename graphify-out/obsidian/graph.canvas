@@ -1,0 +1,2930 @@
+{
+  "nodes": [
+    {
+      "id": "g0",
+      "type": "group",
+      "label": "Streamlit UI & App Logic",
+      "x": 0,
+      "y": 0,
+      "width": 1320,
+      "height": 1220,
+      "color": "1"
+    },
+    {
+      "id": "n_ingestion_chunker_Chunk",
+      "type": "file",
+      "file": "Chunk dataclass.md",
+      "x": 20,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_Chunker",
+      "type": "file",
+      "file": "Chunker class.md",
+      "x": 220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_confidence_gating",
+      "type": "file",
+      "file": "Confidence Gating (skip LLM on NONE).md",
+      "x": 420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_Confidence",
+      "type": "file",
+      "file": "Confidence enum.md",
+      "x": 20,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_IngestionPipeline",
+      "type": "file",
+      "file": "IngestionPipeline class.md",
+      "x": 220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_intent_classification",
+      "type": "file",
+      "file": "Intent Classification Strategy.md",
+      "x": 420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_Intent",
+      "type": "file",
+      "file": "Intent enum.md",
+      "x": 20,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_llm_client_generate",
+      "type": "file",
+      "file": "LLMClient.generate.md",
+      "x": 220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_llm_client_generate_with_history",
+      "type": "file",
+      "file": "LLMClient.generate_with_history.md",
+      "x": 420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_llm_client_stream_with_history",
+      "type": "file",
+      "file": "LLMClient.stream_with_history.md",
+      "x": 20,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_mongodb_sessions",
+      "type": "file",
+      "file": "MongoDB Session Persistence.md",
+      "x": 220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_Orchestrator",
+      "type": "file",
+      "file": "Orchestrator class.md",
+      "x": 420,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_assemble_context",
+      "type": "file",
+      "file": "Orchestrator._assemble_context.md",
+      "x": 20,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_assess_confidence",
+      "type": "file",
+      "file": "Orchestrator._assess_confidence.md",
+      "x": 220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_classify",
+      "type": "file",
+      "file": "Orchestrator._classify.md",
+      "x": 420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_rewrite",
+      "type": "file",
+      "file": "Orchestrator._rewrite.md",
+      "x": 20,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_process",
+      "type": "file",
+      "file": "Orchestrator.process (sync).md",
+      "x": 220,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_process_stream",
+      "type": "file",
+      "file": "Orchestrator.process_stream (streaming).md",
+      "x": 420,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_OrchestratorResult",
+      "type": "file",
+      "file": "OrchestratorResult dataclass.md",
+      "x": 20,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_parent_child_chunks",
+      "type": "file",
+      "file": "Parent-Child Chunk Pattern.md",
+      "x": 220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_RawDocument",
+      "type": "file",
+      "file": "RawDocument dataclass.md",
+      "x": 420,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_SearchResult",
+      "type": "file",
+      "file": "SearchResult dataclass.md",
+      "x": 20,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_session_store_SessionStore",
+      "type": "file",
+      "file": "SessionStore class.md",
+      "x": 220,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_app_streamlit_ui",
+      "type": "file",
+      "file": "Streamlit UI (app.py).md",
+      "x": 420,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_session_store_deserialize_message",
+      "type": "file",
+      "file": "_deserialize_message.md",
+      "x": 20,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_fast_classify",
+      "type": "file",
+      "file": "_fast_classify (regex greeting classifier).md",
+      "x": 220,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_session_store_serialize_message",
+      "type": "file",
+      "file": "_serialize_message.md",
+      "x": 420,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingest_normalize_url",
+      "type": "file",
+      "file": "ingest._normalize_url.md",
+      "x": 20,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingest_load_urls",
+      "type": "file",
+      "file": "ingest.load_urls.md",
+      "x": 220,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingest_run",
+      "type": "file",
+      "file": "ingest.run function.md",
+      "x": 420,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_app_init_state",
+      "type": "file",
+      "file": "init_state function.md",
+      "x": 20,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_config_settings_singleton",
+      "type": "file",
+      "file": "settings singleton.md",
+      "x": 220,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g1",
+      "type": "group",
+      "label": "LLM Client & API",
+      "x": 1400,
+      "y": 0,
+      "width": 1320,
+      "height": 1220,
+      "color": "2"
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_llm_client_llmclient_init",
+      "type": "file",
+      "file": ".__init__().md",
+      "x": 1420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_init",
+      "type": "file",
+      "file": ".__init__()_1.md",
+      "x": 1620,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "type": "file",
+      "file": "._classify().md",
+      "x": 1820,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "type": "file",
+      "file": "._rewrite().md",
+      "x": 1420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_llm_client_llmclient_generate",
+      "type": "file",
+      "file": ".generate().md",
+      "x": 1620,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_llm_client_llmclient_generate_with_history",
+      "type": "file",
+      "file": ".generate_with_history().md",
+      "x": 1820,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "type": "file",
+      "file": ".process().md",
+      "x": 1420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "type": "file",
+      "file": ".process_stream().md",
+      "x": 1620,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_llm_client_llmclient_stream_with_history",
+      "type": "file",
+      "file": ".stream_with_history().md",
+      "x": 1820,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_confidence",
+      "type": "file",
+      "file": "Confidence.md",
+      "x": 1420,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_enum",
+      "type": "file",
+      "file": "Enum.md",
+      "x": 1620,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_intent",
+      "type": "file",
+      "file": "Intent.md",
+      "x": 1820,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_llm_client_rationale_1",
+      "type": "file",
+      "file": "LLM client \u2014 wraps OpenAI or Azure OpenAI for sync generation and streaming. Se.md",
+      "x": 1420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "type": "file",
+      "file": "LLMClient.md",
+      "x": 1620,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "type": "file",
+      "file": "Orchestrator.md",
+      "x": 1820,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_rationale_1",
+      "type": "file",
+      "file": "Orchestrator \u2014 the brain of the RAG chatbot.  Flow   user message \u2192 intent c.md",
+      "x": 1420,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "type": "file",
+      "file": "OrchestratorResult.md",
+      "x": 1620,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_rationale_35",
+      "type": "file",
+      "file": "Reconstruct in-memory message from MongoDB document..md",
+      "x": 1820,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_searchresult",
+      "type": "file",
+      "file": "SearchResult.md",
+      "x": 1420,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_rationale_195",
+      "type": "file",
+      "file": "Streaming yields str chunks, then a final OrchestratorResult..md",
+      "x": 1620,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_rationale_119",
+      "type": "file",
+      "file": "Sync processing \u2014 returns full result..md",
+      "x": 1820,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "type": "file",
+      "file": "_assemble_context().md",
+      "x": 1420,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "type": "file",
+      "file": "_assess_confidence().md",
+      "x": 1620,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "type": "file",
+      "file": "_build_messages().md",
+      "x": 1820,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "type": "file",
+      "file": "_deserialize_message().md",
+      "x": 1420,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "type": "file",
+      "file": "_extract_sources().md",
+      "x": 1620,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "type": "file",
+      "file": "_fast_classify().md",
+      "x": 1820,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_orchestrator_history_text",
+      "type": "file",
+      "file": "_history_text().md",
+      "x": 1420,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_llm_client_py",
+      "type": "file",
+      "file": "llm_client.py.md",
+      "x": 1620,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_orchestrator_py",
+      "type": "file",
+      "file": "orchestrator.py.md",
+      "x": 1820,
+      "y": 800,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_str",
+      "type": "file",
+      "file": "str.md",
+      "x": 1420,
+      "y": 880,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g2",
+      "type": "group",
+      "label": "Document Loaders",
+      "x": 2800,
+      "y": 0,
+      "width": 1320,
+      "height": 1020,
+      "color": "3"
+    },
+    {
+      "id": "n_ingestion_loaders_webloader_extract_sections",
+      "type": "file",
+      "file": "._extract_sections().md",
+      "x": 2820,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_webloader_load",
+      "type": "file",
+      "file": ".load().md",
+      "x": 3020,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_pdfloader_load",
+      "type": "file",
+      "file": ".load()_1.md",
+      "x": 3220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_docxloader_load",
+      "type": "file",
+      "file": ".load()_2.md",
+      "x": 2820,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_csvloader_load",
+      "type": "file",
+      "file": ".load()_3.md",
+      "x": 3020,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_excelloader_load",
+      "type": "file",
+      "file": ".load()_4.md",
+      "x": 3220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_txtloader_load",
+      "type": "file",
+      "file": ".load()_5.md",
+      "x": 2820,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_textloader_load",
+      "type": "file",
+      "file": ".load()_6.md",
+      "x": 3020,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_csvloader",
+      "type": "file",
+      "file": "CSVLoader.md",
+      "x": 3220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_CSVLoader",
+      "type": "file",
+      "file": "CSVLoader class.md",
+      "x": 2820,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_docxloader",
+      "type": "file",
+      "file": "DocxLoader.md",
+      "x": 3020,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_DocxLoader",
+      "type": "file",
+      "file": "DocxLoader class.md",
+      "x": 3220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_excelloader",
+      "type": "file",
+      "file": "ExcelLoader.md",
+      "x": 2820,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_ExcelLoader",
+      "type": "file",
+      "file": "ExcelLoader class.md",
+      "x": 3020,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_pdfloader",
+      "type": "file",
+      "file": "PDFLoader.md",
+      "x": 3220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_PDFLoader",
+      "type": "file",
+      "file": "PDFLoader class.md",
+      "x": 2820,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_rawdocument",
+      "type": "file",
+      "file": "RawDocument.md",
+      "x": 3020,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_rationale_1",
+      "type": "file",
+      "file": "Source loaders \u2014 extract structured text from web pages, PDFs, DOCX, CSV, Excel,.md",
+      "x": 3220,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_txtloader",
+      "type": "file",
+      "file": "TxtLoader.md",
+      "x": 2820,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_TxtLoader",
+      "type": "file",
+      "file": "TxtLoader class.md",
+      "x": 3020,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_webloader",
+      "type": "file",
+      "file": "WebLoader.md",
+      "x": 3220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_WebLoader",
+      "type": "file",
+      "file": "WebLoader class.md",
+      "x": 2820,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_read",
+      "type": "file",
+      "file": "_read().md",
+      "x": 3020,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_content_hash",
+      "type": "file",
+      "file": "content_hash()_1.md",
+      "x": 3220,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_get_loader",
+      "type": "file",
+      "file": "get_loader().md",
+      "x": 2820,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_py",
+      "type": "file",
+      "file": "loaders.py.md",
+      "x": 3020,
+      "y": 720,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g3",
+      "type": "group",
+      "label": "ChromaDB & Embeddings",
+      "x": 4200,
+      "y": 0,
+      "width": 1100,
+      "height": 920,
+      "color": "4"
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_init",
+      "type": "file",
+      "file": ".__init__()_3.md",
+      "x": 4220,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_process",
+      "type": "file",
+      "file": "._process().md",
+      "x": 4420,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_remove_source",
+      "type": "file",
+      "file": "._remove_source().md",
+      "x": 4620,
+      "y": 80,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_delete_source",
+      "type": "file",
+      "file": ".delete_source().md",
+      "x": 4220,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_ingest_file",
+      "type": "file",
+      "file": ".ingest_file().md",
+      "x": 4420,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_ingest_text",
+      "type": "file",
+      "file": ".ingest_text().md",
+      "x": 4620,
+      "y": 160,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_ingest_url",
+      "type": "file",
+      "file": ".ingest_url().md",
+      "x": 4220,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_list_sources",
+      "type": "file",
+      "file": ".list_sources().md",
+      "x": 4420,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline_total_chunks",
+      "type": "file",
+      "file": ".total_chunks().md",
+      "x": 4620,
+      "y": 240,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_chromadb",
+      "type": "file",
+      "file": "ChromaDB Vector Store.md",
+      "x": 4220,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_rationale_66",
+      "type": "file",
+      "file": "Clear v1 chunks (no source_hash) so a fresh ingest produces a consistent corpus..md",
+      "x": 4420,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_rationale_39",
+      "type": "file",
+      "file": "Embed a batch of texts using the configured provider..md",
+      "x": 4620,
+      "y": 320,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_rationale_1",
+      "type": "file",
+      "file": "Ingestion pipeline \u2014 orchestrates load \u2192 chunk \u2192 enrich \u2192 embed \u2192 store. Idemp.md",
+      "x": 4220,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_ingestionpipeline",
+      "type": "file",
+      "file": "IngestionPipeline.md",
+      "x": 4420,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_process",
+      "type": "file",
+      "file": "IngestionPipeline._process.md",
+      "x": 4620,
+      "y": 400,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_rationale_92",
+      "type": "file",
+      "file": "Return enriched text for embedding. chunk.text stays raw (stored as document)..md",
+      "x": 4220,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_loaders_textloader",
+      "type": "file",
+      "file": "TextLoader.md",
+      "x": 4420,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_enrich",
+      "type": "file",
+      "file": "_enrich().md",
+      "x": 4620,
+      "y": 480,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_get_embed_client",
+      "type": "file",
+      "file": "_get_embed_client().md",
+      "x": 4220,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_migrate_schema_if_needed",
+      "type": "file",
+      "file": "_migrate_schema_if_needed().md",
+      "x": 4420,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_get_collection",
+      "type": "file",
+      "file": "get_collection().md",
+      "x": 4620,
+      "y": 560,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_get_embeddings",
+      "type": "file",
+      "file": "get_embeddings().md",
+      "x": 4220,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_pipeline_py",
+      "type": "file",
+      "file": "pipeline.py.md",
+      "x": 4420,
+      "y": 640,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g4",
+      "type": "group",
+      "label": "Hybrid Retrieval & Reranking",
+      "x": 0,
+      "y": 1300,
+      "width": 1100,
+      "height": 720,
+      "color": "5"
+    },
+    {
+      "id": "n_retrieval_engine_rationale_234",
+      "type": "file",
+      "file": "Full pipeline vector + BM25 \u2192 RRF \u2192 rerank \u2192 top results..md",
+      "x": 20,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_hybrid_retrieval",
+      "type": "file",
+      "file": "Hybrid Retrieval Pattern.md",
+      "x": 220,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_rationale_1",
+      "type": "file",
+      "file": "Hybrid retrieval engine combining   1. Vector search (cosine similarity via Ch.md",
+      "x": 420,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_llm_client_LLMClient",
+      "type": "file",
+      "file": "LLMClient class.md",
+      "x": 20,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_concept_rrf_fusion",
+      "type": "file",
+      "file": "Reciprocal Rank Fusion (RRF).md",
+      "x": 220,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_crossencoder_rerank",
+      "type": "file",
+      "file": "_crossencoder_rerank().md",
+      "x": 420,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_get_bm25_index",
+      "type": "file",
+      "file": "_get_bm25_index().md",
+      "x": 20,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_get_llm_rerank_client",
+      "type": "file",
+      "file": "_get_llm_rerank_client().md",
+      "x": 220,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_get_reranker",
+      "type": "file",
+      "file": "_get_reranker().md",
+      "x": 420,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_llm_rerank",
+      "type": "file",
+      "file": "_llm_rerank().md",
+      "x": 20,
+      "y": 1620,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_app_run_warmup",
+      "type": "file",
+      "file": "_run_warmup background function.md",
+      "x": 220,
+      "y": 1620,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_py",
+      "type": "file",
+      "file": "engine.py.md",
+      "x": 420,
+      "y": 1620,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_hybrid_retrieve",
+      "type": "file",
+      "file": "hybrid_retrieve().md",
+      "x": 20,
+      "y": 1700,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_keyword_search",
+      "type": "file",
+      "file": "keyword_search().md",
+      "x": 220,
+      "y": 1700,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_rerank",
+      "type": "file",
+      "file": "rerank().md",
+      "x": 420,
+      "y": 1700,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_rrf_fuse",
+      "type": "file",
+      "file": "rrf_fuse().md",
+      "x": 20,
+      "y": 1780,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_retrieval_engine_vector_search",
+      "type": "file",
+      "file": "vector_search().md",
+      "x": 220,
+      "y": 1780,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g5",
+      "type": "group",
+      "label": "App Entry & Session Init",
+      "x": 1400,
+      "y": 1300,
+      "width": 880,
+      "height": 720,
+      "color": "6"
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_sessionstore_init",
+      "type": "file",
+      "file": ".__init__()_2.md",
+      "x": 1420,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_sessionstore_delete",
+      "type": "file",
+      "file": ".delete().md",
+      "x": 1620,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "type": "file",
+      "file": ".load_all().md",
+      "x": 1820,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "type": "file",
+      "file": ".save().md",
+      "x": 1420,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_rationale_19",
+      "type": "file",
+      "file": "Convert in-memory message (may have OrchestratorResult) to MongoDB-safe dict..md",
+      "x": 1620,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_rationale_1",
+      "type": "file",
+      "file": "MongoDB-backed session store. Persists chat sessions across Streamlit restarts..md",
+      "x": 1820,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_app_rationale_1",
+      "type": "file",
+      "file": "RAG Chatbot \u2014 Streamlit UI  Run with  streamlit run app.py Ingest data first.md",
+      "x": 1420,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_rationale_61",
+      "type": "file",
+      "file": "Return {session_id {name, messages}} sorted by creation time..md",
+      "x": 1620,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "type": "file",
+      "file": "SessionStore.md",
+      "x": 1820,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_rationale_75",
+      "type": "file",
+      "file": "Upsert session to MongoDB..md",
+      "x": 1420,
+      "y": 1620,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_app_new_session_id",
+      "type": "file",
+      "file": "_new_session_id().md",
+      "x": 1620,
+      "y": 1620,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_app_run_warmup",
+      "type": "file",
+      "file": "_run_warmup().md",
+      "x": 1820,
+      "y": 1620,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_session_store_serialize_message",
+      "type": "file",
+      "file": "_serialize_message().md",
+      "x": 1420,
+      "y": 1700,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_app_py",
+      "type": "file",
+      "file": "app.py.md",
+      "x": 1620,
+      "y": 1700,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_app_init_state",
+      "type": "file",
+      "file": "init_state().md",
+      "x": 1820,
+      "y": 1700,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_session_store_py",
+      "type": "file",
+      "file": "session_store.py.md",
+      "x": 1420,
+      "y": 1780,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g6",
+      "type": "group",
+      "label": "Text Chunker",
+      "x": 2800,
+      "y": 1300,
+      "width": 660,
+      "height": 420,
+      "color": "1"
+    },
+    {
+      "id": "n_ingestion_chunker_chunker_chunk_section",
+      "type": "file",
+      "file": "._chunk_section().md",
+      "x": 2820,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_chunker_chunk",
+      "type": "file",
+      "file": ".chunk().md",
+      "x": 3020,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_chunk",
+      "type": "file",
+      "file": "Chunk.md",
+      "x": 3220,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_chunker",
+      "type": "file",
+      "file": "Chunker.md",
+      "x": 2820,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_rationale_1",
+      "type": "file",
+      "file": "Structure-aware chunker \u2014 respects heading boundaries, never splits mid-sentence.md",
+      "x": 3020,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_approx_tokens",
+      "type": "file",
+      "file": "_approx_tokens().md",
+      "x": 3220,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_make",
+      "type": "file",
+      "file": "_make().md",
+      "x": 2820,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_py",
+      "type": "file",
+      "file": "chunker.py.md",
+      "x": 3020,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingestion_chunker_content_hash",
+      "type": "file",
+      "file": "content_hash().md",
+      "x": 3220,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g7",
+      "type": "group",
+      "label": "Ingest CLI Pipeline",
+      "x": 4200,
+      "y": 1300,
+      "width": 660,
+      "height": 420,
+      "color": "2"
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_rationale_1",
+      "type": "file",
+      "file": "CLI ingestion script. Reads dataurls.txt (or dataweb_urls.txt) and all suppor.md",
+      "x": 4220,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_rationale_22",
+      "type": "file",
+      "file": "Repair common URL entry errors; return clean URL or None if unrecognisable..md",
+      "x": 4420,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_log_result",
+      "type": "file",
+      "file": "_log_result().md",
+      "x": 4620,
+      "y": 1380,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_normalize_url",
+      "type": "file",
+      "file": "_normalize_url().md",
+      "x": 4220,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_ingest_py",
+      "type": "file",
+      "file": "ingest.py.md",
+      "x": 4420,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_load_files",
+      "type": "file",
+      "file": "load_files().md",
+      "x": 4620,
+      "y": 1460,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_load_urls",
+      "type": "file",
+      "file": "load_urls().md",
+      "x": 4220,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_main",
+      "type": "file",
+      "file": "main().md",
+      "x": 4420,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_ingest_run",
+      "type": "file",
+      "file": "run().md",
+      "x": 4620,
+      "y": 1540,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g8",
+      "type": "group",
+      "label": "Claude Settings",
+      "x": 0,
+      "y": 2100,
+      "width": 600,
+      "height": 400,
+      "color": "3"
+    },
+    {
+      "id": "n_claude_settings_statusline_command",
+      "type": "file",
+      "file": "command.md",
+      "x": 20,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_settings_json",
+      "type": "file",
+      "file": "settings.json.md",
+      "x": 220,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_settings_statusline",
+      "type": "file",
+      "file": "statusLine.md",
+      "x": 420,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_settings_statusline_type",
+      "type": "file",
+      "file": "type.md",
+      "x": 20,
+      "y": 2260,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g9",
+      "type": "group",
+      "label": "Local Permissions Config",
+      "x": 1400,
+      "y": 2100,
+      "width": 600,
+      "height": 400,
+      "color": "4"
+    },
+    {
+      "id": "n_claude_settings_local_permissions_allow",
+      "type": "file",
+      "file": "allow.md",
+      "x": 1420,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_settings_local_permissions",
+      "type": "file",
+      "file": "permissions.md",
+      "x": 1620,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_claude_settings_local_json",
+      "type": "file",
+      "file": "settings.local.json.md",
+      "x": 1820,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g10",
+      "type": "group",
+      "label": "Settings Config",
+      "x": 2800,
+      "y": 2100,
+      "width": 600,
+      "height": 400,
+      "color": "5"
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_config_rationale_1",
+      "type": "file",
+      "file": "Central configuration. Every tunable in one place \u2014 no magic numbers..md",
+      "x": 2820,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_lucid_bouman_34e0b7_config_settings",
+      "type": "file",
+      "file": "Settings.md",
+      "x": 3020,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "n_config_py",
+      "type": "file",
+      "file": "config.py.md",
+      "x": 3220,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g11",
+      "type": "group",
+      "label": "Statusline Script",
+      "x": 4200,
+      "y": 2100,
+      "width": 600,
+      "height": 400,
+      "color": "6"
+    },
+    {
+      "id": "n_claude_statusline_command_sh",
+      "type": "file",
+      "file": "statusline-command.sh.md",
+      "x": 4220,
+      "y": 2180,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g12",
+      "type": "group",
+      "label": "Settings Dataclass",
+      "x": 0,
+      "y": 2580,
+      "width": 600,
+      "height": 400,
+      "color": "1"
+    },
+    {
+      "id": "n_config_settings",
+      "type": "file",
+      "file": "Settings dataclass (config.py).md",
+      "x": 20,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    },
+    {
+      "id": "g13",
+      "type": "group",
+      "label": "CLI Entry Point",
+      "x": 1400,
+      "y": 2580,
+      "width": 600,
+      "height": 400,
+      "color": "2"
+    },
+    {
+      "id": "n_ingest_main",
+      "type": "file",
+      "file": "ingest.py CLI entry point.md",
+      "x": 1420,
+      "y": 2660,
+      "width": 180,
+      "height": 60
+    }
+  ],
+  "edges": [
+    {
+      "id": "e_app_py_lucid_bouman_34e0b7_app_run_warmup",
+      "fromNode": "n_app_py",
+      "toNode": "n_lucid_bouman_34e0b7_app_run_warmup",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_app_py_lucid_bouman_34e0b7_app_new_session_id",
+      "fromNode": "n_app_py",
+      "toNode": "n_lucid_bouman_34e0b7_app_new_session_id",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_app_py_lucid_bouman_34e0b7_app_init_state",
+      "fromNode": "n_app_py",
+      "toNode": "n_lucid_bouman_34e0b7_app_init_state",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_app_py_lucid_bouman_34e0b7_app_rationale_1",
+      "fromNode": "n_app_py",
+      "toNode": "n_lucid_bouman_34e0b7_app_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_app_new_session_id_lucid_bouman_34e0b7_app_init_state",
+      "fromNode": "n_lucid_bouman_34e0b7_app_new_session_id",
+      "toNode": "n_lucid_bouman_34e0b7_app_init_state",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_app_init_state_ingestion_pipeline_ingestionpipeline",
+      "fromNode": "n_lucid_bouman_34e0b7_app_init_state",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_app_init_state_lucid_bouman_34e0b7_llm_client_llmclient",
+      "fromNode": "n_lucid_bouman_34e0b7_app_init_state",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_app_init_state_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "fromNode": "n_lucid_bouman_34e0b7_app_init_state",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_app_init_state_lucid_bouman_34e0b7_session_store_sessionstore",
+      "fromNode": "n_lucid_bouman_34e0b7_app_init_state",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_config_py_lucid_bouman_34e0b7_config_settings",
+      "fromNode": "n_config_py",
+      "toNode": "n_lucid_bouman_34e0b7_config_settings",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_config_py_lucid_bouman_34e0b7_config_rationale_1",
+      "fromNode": "n_config_py",
+      "toNode": "n_lucid_bouman_34e0b7_config_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_normalize_url",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_normalize_url",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_log_result",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_log_result",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_load_urls",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_load_urls",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_load_files",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_load_files",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_run",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_run",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_main",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_main",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingest_py_lucid_bouman_34e0b7_ingest_rationale_1",
+      "fromNode": "n_ingest_py",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_normalize_url_lucid_bouman_34e0b7_ingest_load_urls",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_normalize_url",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_load_urls",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_normalize_url_lucid_bouman_34e0b7_ingest_rationale_22",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_normalize_url",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_rationale_22",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_log_result_lucid_bouman_34e0b7_ingest_run",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_log_result",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_run",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_load_urls_lucid_bouman_34e0b7_ingest_main",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_load_urls",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_main",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_load_files_lucid_bouman_34e0b7_ingest_main",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_load_files",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_main",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_run_lucid_bouman_34e0b7_ingest_main",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_run",
+      "toNode": "n_lucid_bouman_34e0b7_ingest_main",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_run_ingestion_pipeline_ingestionpipeline",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_run",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_ingest_run_str",
+      "fromNode": "n_lucid_bouman_34e0b7_ingest_run",
+      "toNode": "n_str",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_llm_client_py_lucid_bouman_34e0b7_llm_client_llmclient",
+      "fromNode": "n_llm_client_py",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_llm_client_py_lucid_bouman_34e0b7_llm_client_rationale_1",
+      "fromNode": "n_llm_client_py",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_llm_client_llmclient_lucid_bouman_34e0b7_llm_client_llmclient_init",
+      "fromNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_llmclient_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_llm_client_llmclient_lucid_bouman_34e0b7_llm_client_llmclient_generate",
+      "fromNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_llmclient_generate",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_llm_client_llmclient_lucid_bouman_34e0b7_llm_client_llmclient_generate_with_history",
+      "fromNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_llmclient_generate_with_history",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_llm_client_llmclient_lucid_bouman_34e0b7_llm_client_llmclient_stream_with_history",
+      "fromNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "toNode": "n_lucid_bouman_34e0b7_llm_client_llmclient_stream_with_history",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_llm_client_llmclient_retrieval_engine_get_llm_rerank_client",
+      "fromNode": "n_lucid_bouman_34e0b7_llm_client_llmclient",
+      "toNode": "n_retrieval_engine_get_llm_rerank_client",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_orchestrator_py_enum",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_enum",
+      "label": "imports_from [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_intent",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_intent",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_confidence",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_confidence",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_history_text",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_history_text",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_orchestrator_py_lucid_bouman_34e0b7_orchestrator_rationale_1",
+      "fromNode": "n_orchestrator_py",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_intent_str",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_intent",
+      "toNode": "n_str",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_intent_enum",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_intent",
+      "toNode": "n_enum",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_intent_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_intent",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_str_lucid_bouman_34e0b7_orchestrator_confidence",
+      "fromNode": "n_str",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_confidence",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_str_ingestion_loaders_csvloader_load",
+      "fromNode": "n_str",
+      "toNode": "n_ingestion_loaders_csvloader_load",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_str_ingestion_loaders_excelloader_load",
+      "fromNode": "n_str",
+      "toNode": "n_ingestion_loaders_excelloader_load",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_enum_lucid_bouman_34e0b7_orchestrator_confidence",
+      "fromNode": "n_enum",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_confidence",
+      "label": "inherits [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_confidence_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_confidence",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestratorresult_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestratorresult_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestratorresult_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_fast_classify_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_lucid_bouman_34e0b7_orchestrator_orchestrator_init",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_history_text",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_history_text",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_lucid_bouman_34e0b7_orchestrator_rationale_119",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_rationale_119",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_retrieval_engine_hybrid_retrieve",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "toNode": "n_retrieval_engine_hybrid_retrieve",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_history_text",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_history_text",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_build_messages",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_lucid_bouman_34e0b7_orchestrator_rationale_195",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_lucid_bouman_34e0b7_orchestrator_rationale_195",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream_retrieval_engine_hybrid_retrieve",
+      "fromNode": "n_lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "toNode": "n_retrieval_engine_hybrid_retrieve",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_session_store_py_lucid_bouman_34e0b7_session_store_serialize_message",
+      "fromNode": "n_session_store_py",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_serialize_message",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_session_store_py_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "fromNode": "n_session_store_py",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_session_store_py_lucid_bouman_34e0b7_session_store_sessionstore",
+      "fromNode": "n_session_store_py",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_session_store_py_lucid_bouman_34e0b7_session_store_rationale_1",
+      "fromNode": "n_session_store_py",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_serialize_message_lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_serialize_message",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_serialize_message_lucid_bouman_34e0b7_session_store_rationale_19",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_serialize_message",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_rationale_19",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_deserialize_message_lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_deserialize_message_lucid_bouman_34e0b7_session_store_rationale_35",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_deserialize_message",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_rationale_35",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_sessionstore_lucid_bouman_34e0b7_session_store_sessionstore_init",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_sessionstore_lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_sessionstore_lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_sessionstore_lucid_bouman_34e0b7_session_store_sessionstore_delete",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_sessionstore",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_delete",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_sessionstore_load_all_lucid_bouman_34e0b7_session_store_rationale_61",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_rationale_61",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_lucid_bouman_34e0b7_session_store_sessionstore_save_lucid_bouman_34e0b7_session_store_rationale_75",
+      "fromNode": "n_lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "toNode": "n_lucid_bouman_34e0b7_session_store_rationale_75",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_settings_json_claude_settings_statusline",
+      "fromNode": "n_claude_settings_json",
+      "toNode": "n_claude_settings_statusline",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_settings_statusline_claude_settings_statusline_type",
+      "fromNode": "n_claude_settings_statusline",
+      "toNode": "n_claude_settings_statusline_type",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_settings_statusline_claude_settings_statusline_command",
+      "fromNode": "n_claude_settings_statusline",
+      "toNode": "n_claude_settings_statusline_command",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_settings_local_json_claude_settings_local_permissions",
+      "fromNode": "n_claude_settings_local_json",
+      "toNode": "n_claude_settings_local_permissions",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_claude_settings_local_permissions_claude_settings_local_permissions_allow",
+      "fromNode": "n_claude_settings_local_permissions",
+      "toNode": "n_claude_settings_local_permissions_allow",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_py_ingestion_chunker_approx_tokens",
+      "fromNode": "n_ingestion_chunker_py",
+      "toNode": "n_ingestion_chunker_approx_tokens",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_py_ingestion_chunker_chunk",
+      "fromNode": "n_ingestion_chunker_py",
+      "toNode": "n_ingestion_chunker_chunk",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_py_ingestion_chunker_content_hash",
+      "fromNode": "n_ingestion_chunker_py",
+      "toNode": "n_ingestion_chunker_content_hash",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_py_ingestion_chunker_chunker",
+      "fromNode": "n_ingestion_chunker_py",
+      "toNode": "n_ingestion_chunker_chunker",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_py_ingestion_chunker_make",
+      "fromNode": "n_ingestion_chunker_py",
+      "toNode": "n_ingestion_chunker_make",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_py_ingestion_chunker_rationale_1",
+      "fromNode": "n_ingestion_chunker_py",
+      "toNode": "n_ingestion_chunker_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_approx_tokens_ingestion_chunker_chunker_chunk_section",
+      "fromNode": "n_ingestion_chunker_approx_tokens",
+      "toNode": "n_ingestion_chunker_chunker_chunk_section",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_chunker_ingestion_chunker_chunker_chunk",
+      "fromNode": "n_ingestion_chunker_chunker",
+      "toNode": "n_ingestion_chunker_chunker_chunk",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_chunker_ingestion_chunker_chunker_chunk_section",
+      "fromNode": "n_ingestion_chunker_chunker",
+      "toNode": "n_ingestion_chunker_chunker_chunk_section",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_chunker_ingestion_pipeline_ingestionpipeline_init",
+      "fromNode": "n_ingestion_chunker_chunker",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_init",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_ingestion_chunker_chunker_chunk_ingestion_chunker_chunker_chunk_section",
+      "fromNode": "n_ingestion_chunker_chunker_chunk",
+      "toNode": "n_ingestion_chunker_chunker_chunk_section",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_chunker_chunk_ingestion_chunker_make",
+      "fromNode": "n_ingestion_chunker_chunker_chunk",
+      "toNode": "n_ingestion_chunker_make",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_chunker_chunker_chunk_section_ingestion_chunker_make",
+      "fromNode": "n_ingestion_chunker_chunker_chunk_section",
+      "toNode": "n_ingestion_chunker_make",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_rawdocument",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_rawdocument",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_content_hash",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_content_hash",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_webloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_webloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_pdfloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_pdfloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_docxloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_docxloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_csvloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_csvloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_read",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_read",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_excelloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_excelloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_txtloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_txtloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_textloader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_textloader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_py_ingestion_loaders_rationale_1",
+      "fromNode": "n_ingestion_loaders_py",
+      "toNode": "n_ingestion_loaders_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_webloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_webloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_pdfloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_pdfloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_docxloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_docxloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_csvloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_csvloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_excelloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_excelloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_txtloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_txtloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_rawdocument_ingestion_loaders_textloader_load",
+      "fromNode": "n_ingestion_loaders_rawdocument",
+      "toNode": "n_ingestion_loaders_textloader_load",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_webloader_ingestion_loaders_webloader_load",
+      "fromNode": "n_ingestion_loaders_webloader",
+      "toNode": "n_ingestion_loaders_webloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_webloader_ingestion_loaders_webloader_extract_sections",
+      "fromNode": "n_ingestion_loaders_webloader",
+      "toNode": "n_ingestion_loaders_webloader_extract_sections",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_webloader_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_webloader",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_webloader_load_ingestion_loaders_webloader_extract_sections",
+      "fromNode": "n_ingestion_loaders_webloader_load",
+      "toNode": "n_ingestion_loaders_webloader_extract_sections",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_pdfloader_ingestion_loaders_pdfloader_load",
+      "fromNode": "n_ingestion_loaders_pdfloader",
+      "toNode": "n_ingestion_loaders_pdfloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_pdfloader_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_pdfloader",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_docxloader_ingestion_loaders_docxloader_load",
+      "fromNode": "n_ingestion_loaders_docxloader",
+      "toNode": "n_ingestion_loaders_docxloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_docxloader_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_docxloader",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_csvloader_ingestion_loaders_csvloader_load",
+      "fromNode": "n_ingestion_loaders_csvloader",
+      "toNode": "n_ingestion_loaders_csvloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_csvloader_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_csvloader",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_csvloader_load_ingestion_loaders_read",
+      "fromNode": "n_ingestion_loaders_csvloader_load",
+      "toNode": "n_ingestion_loaders_read",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_excelloader_ingestion_loaders_excelloader_load",
+      "fromNode": "n_ingestion_loaders_excelloader",
+      "toNode": "n_ingestion_loaders_excelloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_excelloader_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_excelloader",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_txtloader_ingestion_loaders_txtloader_load",
+      "fromNode": "n_ingestion_loaders_txtloader",
+      "toNode": "n_ingestion_loaders_txtloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_txtloader_ingestion_loaders_get_loader",
+      "fromNode": "n_ingestion_loaders_txtloader",
+      "toNode": "n_ingestion_loaders_get_loader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_textloader_ingestion_loaders_textloader_load",
+      "fromNode": "n_ingestion_loaders_textloader",
+      "toNode": "n_ingestion_loaders_textloader_load",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_textloader_ingestion_pipeline_ingestionpipeline_ingest_text",
+      "fromNode": "n_ingestion_loaders_textloader",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_ingest_text",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_pipeline_ingestionpipeline_ingest_url",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_ingest_url",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_pipeline_ingestionpipeline_ingest_file",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_ingest_file",
+      "label": "calls [INFERRED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_pipeline_IngestionPipeline",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_pipeline_IngestionPipeline",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_loaders_WebLoader",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_loaders_WebLoader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_loaders_PDFLoader",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_loaders_PDFLoader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_loaders_DocxLoader",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_loaders_DocxLoader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_loaders_CSVLoader",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_loaders_CSVLoader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_loaders_ExcelLoader",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_loaders_ExcelLoader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_loaders_get_loader_ingestion_loaders_TxtLoader",
+      "fromNode": "n_ingestion_loaders_get_loader",
+      "toNode": "n_ingestion_loaders_TxtLoader",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_get_embed_client",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_get_embed_client",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_get_embeddings",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_get_embeddings",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_get_collection",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_get_collection",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_migrate_schema_if_needed",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_migrate_schema_if_needed",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_enrich",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_enrich",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_ingestionpipeline",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline",
+      "label": "contains [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_py_ingestion_pipeline_rationale_1",
+      "fromNode": "n_ingestion_pipeline_py",
+      "toNode": "n_ingestion_pipeline_rationale_1",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_embed_client_ingestion_pipeline_get_embeddings",
+      "fromNode": "n_ingestion_pipeline_get_embed_client",
+      "toNode": "n_ingestion_pipeline_get_embeddings",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_embeddings_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_get_embeddings",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_embeddings_ingestion_pipeline_rationale_39",
+      "fromNode": "n_ingestion_pipeline_get_embeddings",
+      "toNode": "n_ingestion_pipeline_rationale_39",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_embeddings_retrieval_engine_vector_search",
+      "fromNode": "n_ingestion_pipeline_get_embeddings",
+      "toNode": "n_retrieval_engine_vector_search",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_embeddings_ingestion_pipeline_process",
+      "fromNode": "n_ingestion_pipeline_get_embeddings",
+      "toNode": "n_ingestion_pipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_embeddings_config_settings_singleton",
+      "fromNode": "n_ingestion_pipeline_get_embeddings",
+      "toNode": "n_config_settings_singleton",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_ingestion_pipeline_ingestionpipeline_init",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_init",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_ingestion_pipeline_ingestionpipeline_remove_source",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_remove_source",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_ingestion_pipeline_ingestionpipeline_list_sources",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_list_sources",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_ingestion_pipeline_ingestionpipeline_total_chunks",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_total_chunks",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_retrieval_engine_vector_search",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_retrieval_engine_vector_search",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_retrieval_engine_get_bm25_index",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_retrieval_engine_get_bm25_index",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_ingestion_pipeline_IngestionPipeline",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_ingestion_pipeline_IngestionPipeline",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_get_collection_config_settings_singleton",
+      "fromNode": "n_ingestion_pipeline_get_collection",
+      "toNode": "n_config_settings_singleton",
+      "label": "references [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_migrate_schema_if_needed_ingestion_pipeline_ingestionpipeline_init",
+      "fromNode": "n_ingestion_pipeline_migrate_schema_if_needed",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_init",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_migrate_schema_if_needed_ingestion_pipeline_rationale_66",
+      "fromNode": "n_ingestion_pipeline_migrate_schema_if_needed",
+      "toNode": "n_ingestion_pipeline_rationale_66",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_enrich_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_enrich",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_enrich_ingestion_pipeline_rationale_92",
+      "fromNode": "n_ingestion_pipeline_enrich",
+      "toNode": "n_ingestion_pipeline_rationale_92",
+      "label": "rationale_for [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_enrich_ingestion_pipeline_process",
+      "fromNode": "n_ingestion_pipeline_enrich",
+      "toNode": "n_ingestion_pipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_init",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_init",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_ingest_url",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_ingest_url",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_ingest_file",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_ingest_file",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_ingest_text",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_ingest_text",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_remove_source",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_remove_source",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_list_sources",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_list_sources",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_delete_source",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_delete_source",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingestion_pipeline_ingestionpipeline_total_chunks",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_total_chunks",
+      "label": "method [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingest_url_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline_ingest_url",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingest_file_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline_ingest_file",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_ingest_text_ingestion_pipeline_ingestionpipeline_process",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline_ingest_text",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_process_ingestion_pipeline_ingestionpipeline_remove_source",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline_process",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_remove_source",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_ingestion_pipeline_ingestionpipeline_remove_source_ingestion_pipeline_ingestionpipeline_delete_source",
+      "fromNode": "n_ingestion_pipeline_ingestionpipeline_remove_source",
+      "toNode": "n_ingestion_pipeline_ingestionpipeline_delete_source",
+      "label": "calls [EXTRACTED]"
+    },
+    {
+      "id": "e_retrieval_engine_py_retrieval_engine_searchresult",
+      "fromNode": "n_retrieval_engine_py",
+      "toNode": "n_retrieval_engine_searchresult",
+      "label": "contains [EXTRACTED]"
+    }
+  ]
+}

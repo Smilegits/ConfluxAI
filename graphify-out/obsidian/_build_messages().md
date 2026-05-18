@@ -1,0 +1,19 @@
+---
+source_file: "orchestrator.py"
+type: "code"
+community: "LLM Client & API"
+location: "L331"
+tags:
+  - graphify/code
+  - graphify/EXTRACTED
+  - community/LLM_Client__API
+---
+
+# _build_messages()
+
+## Connections
+- [[.process()]] - `calls` [EXTRACTED]
+- [[.process_stream()]] - `calls` [EXTRACTED]
+- [[orchestrator.py]] - `contains` [EXTRACTED]
+
+#graphify/code #graphify/EXTRACTED #community/LLM_Client__API

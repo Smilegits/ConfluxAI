@@ -1,0 +1,4997 @@
+{
+  "directed": false,
+  "multigraph": false,
+  "graph": {
+    "hyperedges": [
+      {
+        "id": "ingestion_pipeline_flow",
+        "label": "Ingestion Pipeline: load -> chunk -> enrich -> embed -> store",
+        "nodes": [
+          "ingestion_loaders_get_loader",
+          "ingestion_chunker_Chunker",
+          "ingestion_pipeline_enrich",
+          "ingestion_pipeline_get_embeddings",
+          "ingestion_pipeline_get_collection"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "ingestion/pipeline.py"
+      },
+      {
+        "id": "rag_query_flow",
+        "label": "RAG Query Flow: intent -> rewrite -> retrieve -> confidence -> generate",
+        "nodes": [
+          "orchestrator_classify",
+          "orchestrator_rewrite",
+          "retrieval_engine_hybrid_retrieve",
+          "orchestrator_assess_confidence",
+          "orchestrator_assemble_context",
+          "llm_client_stream_with_history"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "orchestrator.py"
+      },
+      {
+        "id": "hybrid_retrieval_subsystem",
+        "label": "Hybrid Retrieval: vector + BM25 + RRF + rerank",
+        "nodes": [
+          "retrieval_engine_vector_search",
+          "retrieval_engine_keyword_search",
+          "retrieval_engine_rrf_fuse",
+          "retrieval_engine_rerank"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "retrieval/engine.py"
+      },
+      {
+        "id": "session_persistence_group",
+        "label": "Session Persistence: save/load/delete via MongoDB",
+        "nodes": [
+          "session_store_SessionStore",
+          "session_store_serialize_message",
+          "session_store_deserialize_message"
+        ],
+        "relation": "implement",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "session_store.py"
+      },
+      {
+        "id": "config_consumers",
+        "label": "All modules consuming Settings singleton",
+        "nodes": [
+          "llm_client_LLMClient",
+          "orchestrator_assess_confidence",
+          "orchestrator_assemble_context",
+          "ingestion_chunker_Chunker",
+          "ingestion_pipeline_get_embeddings",
+          "ingestion_pipeline_get_collection",
+          "retrieval_engine_rerank",
+          "session_store_SessionStore"
+        ],
+        "relation": "participate_in",
+        "confidence": "EXTRACTED",
+        "confidence_score": 1.0,
+        "source_file": "config.py"
+      }
+    ]
+  },
+  "nodes": [
+    {
+      "label": "app.py",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "id": "app_py",
+      "community": 5,
+      "norm_label": "app.py"
+    },
+    {
+      "label": "_run_warmup()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L30",
+      "id": "lucid_bouman_34e0b7_app_run_warmup",
+      "community": 5,
+      "norm_label": "_run_warmup()"
+    },
+    {
+      "label": "_new_session_id()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L109",
+      "id": "lucid_bouman_34e0b7_app_new_session_id",
+      "community": 5,
+      "norm_label": "_new_session_id()"
+    },
+    {
+      "label": "init_state()",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "L113",
+      "id": "lucid_bouman_34e0b7_app_init_state",
+      "community": 5,
+      "norm_label": "init_state()"
+    },
+    {
+      "label": "RAG Chatbot \u2014 Streamlit UI  Run with:  streamlit run app.py Ingest data first",
+      "file_type": "rationale",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "id": "lucid_bouman_34e0b7_app_rationale_1",
+      "community": 5,
+      "norm_label": "rag chatbot \u2014 streamlit ui  run with:  streamlit run app.py ingest data first"
+    },
+    {
+      "label": "config.py",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L1",
+      "id": "config_py",
+      "community": 10,
+      "norm_label": "config.py"
+    },
+    {
+      "label": "Settings",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "L12",
+      "id": "lucid_bouman_34e0b7_config_settings",
+      "community": 10,
+      "norm_label": "settings"
+    },
+    {
+      "label": "Central configuration. Every tunable in one place \u2014 no magic numbers.",
+      "file_type": "rationale",
+      "source_file": "config.py",
+      "source_location": "L1",
+      "id": "lucid_bouman_34e0b7_config_rationale_1",
+      "community": 10,
+      "norm_label": "central configuration. every tunable in one place \u2014 no magic numbers."
+    },
+    {
+      "label": "ingest.py",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L1",
+      "id": "ingest_py",
+      "community": 7,
+      "norm_label": "ingest.py"
+    },
+    {
+      "label": "_normalize_url()",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L21",
+      "id": "lucid_bouman_34e0b7_ingest_normalize_url",
+      "community": 7,
+      "norm_label": "_normalize_url()"
+    },
+    {
+      "label": "_log_result()",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L47",
+      "id": "lucid_bouman_34e0b7_ingest_log_result",
+      "community": 7,
+      "norm_label": "_log_result()"
+    },
+    {
+      "label": "load_urls()",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L63",
+      "id": "lucid_bouman_34e0b7_ingest_load_urls",
+      "community": 7,
+      "norm_label": "load_urls()"
+    },
+    {
+      "label": "load_files()",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L97",
+      "id": "lucid_bouman_34e0b7_ingest_load_files",
+      "community": 7,
+      "norm_label": "load_files()"
+    },
+    {
+      "label": "run()",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L108",
+      "id": "lucid_bouman_34e0b7_ingest_run",
+      "community": 7,
+      "norm_label": "run()"
+    },
+    {
+      "label": "main()",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "L146",
+      "id": "lucid_bouman_34e0b7_ingest_main",
+      "community": 7,
+      "norm_label": "main()"
+    },
+    {
+      "label": "CLI ingestion script. Reads data/urls.txt (or data/web_urls.txt) and all suppor",
+      "file_type": "rationale",
+      "source_file": "ingest.py",
+      "source_location": "L1",
+      "id": "lucid_bouman_34e0b7_ingest_rationale_1",
+      "community": 7,
+      "norm_label": "cli ingestion script. reads data/urls.txt (or data/web_urls.txt) and all suppor"
+    },
+    {
+      "label": "Repair common URL entry errors; return clean URL or None if unrecognisable.",
+      "file_type": "rationale",
+      "source_file": "ingest.py",
+      "source_location": "L22",
+      "id": "lucid_bouman_34e0b7_ingest_rationale_22",
+      "community": 7,
+      "norm_label": "repair common url entry errors; return clean url or none if unrecognisable."
+    },
+    {
+      "label": "llm_client.py",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "L1",
+      "id": "llm_client_py",
+      "community": 1,
+      "norm_label": "llm_client.py"
+    },
+    {
+      "label": "LLMClient",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "L15",
+      "id": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "community": 1,
+      "norm_label": "llmclient"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "L16",
+      "id": "lucid_bouman_34e0b7_llm_client_llmclient_init",
+      "community": 1,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": ".generate()",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "L35",
+      "id": "lucid_bouman_34e0b7_llm_client_llmclient_generate",
+      "community": 1,
+      "norm_label": ".generate()"
+    },
+    {
+      "label": ".generate_with_history()",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "L47",
+      "id": "lucid_bouman_34e0b7_llm_client_llmclient_generate_with_history",
+      "community": 1,
+      "norm_label": ".generate_with_history()"
+    },
+    {
+      "label": ".stream_with_history()",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "L60",
+      "id": "lucid_bouman_34e0b7_llm_client_llmclient_stream_with_history",
+      "community": 1,
+      "norm_label": ".stream_with_history()"
+    },
+    {
+      "label": "LLM client \u2014 wraps OpenAI or Azure OpenAI for sync generation and streaming. Se",
+      "file_type": "rationale",
+      "source_file": "llm_client.py",
+      "source_location": "L1",
+      "id": "lucid_bouman_34e0b7_llm_client_rationale_1",
+      "community": 1,
+      "norm_label": "llm client \u2014 wraps openai or azure openai for sync generation and streaming. se"
+    },
+    {
+      "label": "orchestrator.py",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L1",
+      "id": "orchestrator_py",
+      "community": 1,
+      "norm_label": "orchestrator.py"
+    },
+    {
+      "label": "Intent",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L24",
+      "id": "lucid_bouman_34e0b7_orchestrator_intent",
+      "community": 1,
+      "norm_label": "intent"
+    },
+    {
+      "label": "str",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "str",
+      "community": 1,
+      "norm_label": "str"
+    },
+    {
+      "label": "Enum",
+      "file_type": "code",
+      "source_file": "",
+      "source_location": "",
+      "id": "enum",
+      "community": 1,
+      "norm_label": "enum"
+    },
+    {
+      "label": "Confidence",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L34",
+      "id": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "community": 1,
+      "norm_label": "confidence"
+    },
+    {
+      "label": "OrchestratorResult",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L50",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "community": 1,
+      "norm_label": "orchestratorresult"
+    },
+    {
+      "label": "_fast_classify()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L107",
+      "id": "lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "community": 1,
+      "norm_label": "_fast_classify()"
+    },
+    {
+      "label": "Orchestrator",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L114",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "community": 1,
+      "norm_label": "orchestrator"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L115",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestrator_init",
+      "community": 1,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": ".process()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L118",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "community": 1,
+      "norm_label": ".process()"
+    },
+    {
+      "label": ".process_stream()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L194",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "community": 1,
+      "norm_label": ".process_stream()"
+    },
+    {
+      "label": "._classify()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L255",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "community": 1,
+      "norm_label": "._classify()"
+    },
+    {
+      "label": "._rewrite()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L270",
+      "id": "lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "community": 1,
+      "norm_label": "._rewrite()"
+    },
+    {
+      "label": "_assess_confidence()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L282",
+      "id": "lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "community": 1,
+      "norm_label": "_assess_confidence()"
+    },
+    {
+      "label": "_assemble_context()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L296",
+      "id": "lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "community": 1,
+      "norm_label": "_assemble_context()"
+    },
+    {
+      "label": "_extract_sources()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L316",
+      "id": "lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "community": 1,
+      "norm_label": "_extract_sources()"
+    },
+    {
+      "label": "_build_messages()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L331",
+      "id": "lucid_bouman_34e0b7_orchestrator_build_messages",
+      "community": 1,
+      "norm_label": "_build_messages()"
+    },
+    {
+      "label": "_history_text()",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "L339",
+      "id": "lucid_bouman_34e0b7_orchestrator_history_text",
+      "community": 1,
+      "norm_label": "_history_text()"
+    },
+    {
+      "label": "Orchestrator \u2014 the brain of the RAG chatbot.  Flow:   user message \u2192 intent c",
+      "file_type": "rationale",
+      "source_file": "orchestrator.py",
+      "source_location": "L1",
+      "id": "lucid_bouman_34e0b7_orchestrator_rationale_1",
+      "community": 1,
+      "norm_label": "orchestrator \u2014 the brain of the rag chatbot.  flow:   user message \u2192 intent c"
+    },
+    {
+      "label": "Sync processing \u2014 returns full result.",
+      "file_type": "rationale",
+      "source_file": "orchestrator.py",
+      "source_location": "L119",
+      "id": "lucid_bouman_34e0b7_orchestrator_rationale_119",
+      "community": 1,
+      "norm_label": "sync processing \u2014 returns full result."
+    },
+    {
+      "label": "Streaming: yields str chunks, then a final OrchestratorResult.",
+      "file_type": "rationale",
+      "source_file": "orchestrator.py",
+      "source_location": "L195",
+      "id": "lucid_bouman_34e0b7_orchestrator_rationale_195",
+      "community": 1,
+      "norm_label": "streaming: yields str chunks, then a final orchestratorresult."
+    },
+    {
+      "label": "session_store.py",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L1",
+      "id": "session_store_py",
+      "community": 5,
+      "norm_label": "session_store.py"
+    },
+    {
+      "label": "_serialize_message()",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L18",
+      "id": "lucid_bouman_34e0b7_session_store_serialize_message",
+      "community": 5,
+      "norm_label": "_serialize_message()"
+    },
+    {
+      "label": "_deserialize_message()",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L34",
+      "id": "lucid_bouman_34e0b7_session_store_deserialize_message",
+      "community": 1,
+      "norm_label": "_deserialize_message()"
+    },
+    {
+      "label": "SessionStore",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L51",
+      "id": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "community": 5,
+      "norm_label": "sessionstore"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L52",
+      "id": "lucid_bouman_34e0b7_session_store_sessionstore_init",
+      "community": 5,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": ".load_all()",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L60",
+      "id": "lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "community": 5,
+      "norm_label": ".load_all()"
+    },
+    {
+      "label": ".save()",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L74",
+      "id": "lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "community": 5,
+      "norm_label": ".save()"
+    },
+    {
+      "label": ".delete()",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "L91",
+      "id": "lucid_bouman_34e0b7_session_store_sessionstore_delete",
+      "community": 5,
+      "norm_label": ".delete()"
+    },
+    {
+      "label": "MongoDB-backed session store. Persists chat sessions across Streamlit restarts.",
+      "file_type": "rationale",
+      "source_file": "session_store.py",
+      "source_location": "L1",
+      "id": "lucid_bouman_34e0b7_session_store_rationale_1",
+      "community": 5,
+      "norm_label": "mongodb-backed session store. persists chat sessions across streamlit restarts."
+    },
+    {
+      "label": "Convert in-memory message (may have OrchestratorResult) to MongoDB-safe dict.",
+      "file_type": "rationale",
+      "source_file": "session_store.py",
+      "source_location": "L19",
+      "id": "lucid_bouman_34e0b7_session_store_rationale_19",
+      "community": 5,
+      "norm_label": "convert in-memory message (may have orchestratorresult) to mongodb-safe dict."
+    },
+    {
+      "label": "Reconstruct in-memory message from MongoDB document.",
+      "file_type": "rationale",
+      "source_file": "session_store.py",
+      "source_location": "L35",
+      "id": "lucid_bouman_34e0b7_session_store_rationale_35",
+      "community": 1,
+      "norm_label": "reconstruct in-memory message from mongodb document."
+    },
+    {
+      "label": "Return {session_id: {name, messages}} sorted by creation time.",
+      "file_type": "rationale",
+      "source_file": "session_store.py",
+      "source_location": "L61",
+      "id": "lucid_bouman_34e0b7_session_store_rationale_61",
+      "community": 5,
+      "norm_label": "return {session_id: {name, messages}} sorted by creation time."
+    },
+    {
+      "label": "Upsert session to MongoDB.",
+      "file_type": "rationale",
+      "source_file": "session_store.py",
+      "source_location": "L75",
+      "id": "lucid_bouman_34e0b7_session_store_rationale_75",
+      "community": 5,
+      "norm_label": "upsert session to mongodb."
+    },
+    {
+      "label": "settings.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L1",
+      "id": "claude_settings_json",
+      "community": 8,
+      "norm_label": "settings.json"
+    },
+    {
+      "label": "statusLine",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "id": "claude_settings_statusline",
+      "community": 8,
+      "norm_label": "statusline"
+    },
+    {
+      "label": "type",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "id": "claude_settings_statusline_type",
+      "community": 8,
+      "norm_label": "type"
+    },
+    {
+      "label": "command",
+      "file_type": "code",
+      "source_file": ".claude/settings.json",
+      "source_location": "L4",
+      "id": "claude_settings_statusline_command",
+      "community": 8,
+      "norm_label": "command"
+    },
+    {
+      "label": "settings.local.json",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L1",
+      "id": "claude_settings_local_json",
+      "community": 9,
+      "norm_label": "settings.local.json"
+    },
+    {
+      "label": "permissions",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "id": "claude_settings_local_permissions",
+      "community": 9,
+      "norm_label": "permissions"
+    },
+    {
+      "label": "allow",
+      "file_type": "code",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "id": "claude_settings_local_permissions_allow",
+      "community": 9,
+      "norm_label": "allow"
+    },
+    {
+      "label": "statusline-command.sh",
+      "file_type": "code",
+      "source_file": ".claude/statusline-command.sh",
+      "source_location": "L1",
+      "id": "claude_statusline_command_sh",
+      "community": 11,
+      "norm_label": "statusline-command.sh"
+    },
+    {
+      "label": "chunker.py",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L1",
+      "id": "ingestion_chunker_py",
+      "community": 6,
+      "norm_label": "chunker.py"
+    },
+    {
+      "label": "_approx_tokens()",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L15",
+      "id": "ingestion_chunker_approx_tokens",
+      "community": 6,
+      "norm_label": "_approx_tokens()"
+    },
+    {
+      "label": "Chunk",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L20",
+      "id": "ingestion_chunker_chunk",
+      "community": 6,
+      "norm_label": "chunk"
+    },
+    {
+      "label": "content_hash()",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L27",
+      "id": "ingestion_chunker_content_hash",
+      "community": 6,
+      "norm_label": "content_hash()"
+    },
+    {
+      "label": "Chunker",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L32",
+      "id": "ingestion_chunker_chunker",
+      "community": 6,
+      "norm_label": "chunker"
+    },
+    {
+      "label": ".chunk()",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L33",
+      "id": "ingestion_chunker_chunker_chunk",
+      "community": 6,
+      "norm_label": ".chunk()"
+    },
+    {
+      "label": "._chunk_section()",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L49",
+      "id": "ingestion_chunker_chunker_chunk_section",
+      "community": 6,
+      "norm_label": "._chunk_section()"
+    },
+    {
+      "label": "_make()",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L76",
+      "id": "ingestion_chunker_make",
+      "community": 6,
+      "norm_label": "_make()"
+    },
+    {
+      "label": "Structure-aware chunker \u2014 respects heading boundaries, never splits mid-sentence",
+      "file_type": "rationale",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L1",
+      "id": "ingestion_chunker_rationale_1",
+      "community": 6,
+      "norm_label": "structure-aware chunker \u2014 respects heading boundaries, never splits mid-sentence"
+    },
+    {
+      "label": "loaders.py",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L1",
+      "id": "ingestion_loaders_py",
+      "community": 2,
+      "norm_label": "loaders.py"
+    },
+    {
+      "label": "RawDocument",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L25",
+      "id": "ingestion_loaders_rawdocument",
+      "community": 2,
+      "norm_label": "rawdocument"
+    },
+    {
+      "label": "content_hash()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L31",
+      "id": "ingestion_loaders_content_hash",
+      "community": 2,
+      "norm_label": "content_hash()"
+    },
+    {
+      "label": "WebLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L35",
+      "id": "ingestion_loaders_webloader",
+      "community": 2,
+      "norm_label": "webloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L38",
+      "id": "ingestion_loaders_webloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "._extract_sections()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L67",
+      "id": "ingestion_loaders_webloader_extract_sections",
+      "community": 2,
+      "norm_label": "._extract_sections()"
+    },
+    {
+      "label": "PDFLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L84",
+      "id": "ingestion_loaders_pdfloader",
+      "community": 2,
+      "norm_label": "pdfloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L85",
+      "id": "ingestion_loaders_pdfloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "DocxLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L102",
+      "id": "ingestion_loaders_docxloader",
+      "community": 2,
+      "norm_label": "docxloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L103",
+      "id": "ingestion_loaders_docxloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "CSVLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L138",
+      "id": "ingestion_loaders_csvloader",
+      "community": 2,
+      "norm_label": "csvloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L141",
+      "id": "ingestion_loaders_csvloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "_read()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L182",
+      "id": "ingestion_loaders_read",
+      "community": 2,
+      "norm_label": "_read()"
+    },
+    {
+      "label": "ExcelLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L192",
+      "id": "ingestion_loaders_excelloader",
+      "community": 2,
+      "norm_label": "excelloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L195",
+      "id": "ingestion_loaders_excelloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "TxtLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L269",
+      "id": "ingestion_loaders_txtloader",
+      "community": 2,
+      "norm_label": "txtloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L270",
+      "id": "ingestion_loaders_txtloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "TextLoader",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L286",
+      "id": "ingestion_loaders_textloader",
+      "community": 3,
+      "norm_label": "textloader"
+    },
+    {
+      "label": ".load()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L288",
+      "id": "ingestion_loaders_textloader_load",
+      "community": 2,
+      "norm_label": ".load()"
+    },
+    {
+      "label": "get_loader()",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L299",
+      "id": "ingestion_loaders_get_loader",
+      "community": 2,
+      "norm_label": "get_loader()"
+    },
+    {
+      "label": "Source loaders \u2014 extract structured text from web pages, PDFs, DOCX, CSV, Excel,",
+      "file_type": "rationale",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L1",
+      "id": "ingestion_loaders_rationale_1",
+      "community": 2,
+      "norm_label": "source loaders \u2014 extract structured text from web pages, pdfs, docx, csv, excel,"
+    },
+    {
+      "label": "pipeline.py",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L1",
+      "id": "ingestion_pipeline_py",
+      "community": 3,
+      "norm_label": "pipeline.py"
+    },
+    {
+      "label": "_get_embed_client()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L24",
+      "id": "ingestion_pipeline_get_embed_client",
+      "community": 3,
+      "norm_label": "_get_embed_client()"
+    },
+    {
+      "label": "get_embeddings()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L38",
+      "id": "ingestion_pipeline_get_embeddings",
+      "community": 3,
+      "norm_label": "get_embeddings()"
+    },
+    {
+      "label": "get_collection()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L50",
+      "id": "ingestion_pipeline_get_collection",
+      "community": 3,
+      "norm_label": "get_collection()"
+    },
+    {
+      "label": "_migrate_schema_if_needed()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L65",
+      "id": "ingestion_pipeline_migrate_schema_if_needed",
+      "community": 3,
+      "norm_label": "_migrate_schema_if_needed()"
+    },
+    {
+      "label": "_enrich()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L91",
+      "id": "ingestion_pipeline_enrich",
+      "community": 3,
+      "norm_label": "_enrich()"
+    },
+    {
+      "label": "IngestionPipeline",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L108",
+      "id": "ingestion_pipeline_ingestionpipeline",
+      "community": 3,
+      "norm_label": "ingestionpipeline"
+    },
+    {
+      "label": ".__init__()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L109",
+      "id": "ingestion_pipeline_ingestionpipeline_init",
+      "community": 3,
+      "norm_label": ".__init__()"
+    },
+    {
+      "label": ".ingest_url()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L113",
+      "id": "ingestion_pipeline_ingestionpipeline_ingest_url",
+      "community": 3,
+      "norm_label": ".ingest_url()"
+    },
+    {
+      "label": ".ingest_file()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L118",
+      "id": "ingestion_pipeline_ingestionpipeline_ingest_file",
+      "community": 3,
+      "norm_label": ".ingest_file()"
+    },
+    {
+      "label": ".ingest_text()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L123",
+      "id": "ingestion_pipeline_ingestionpipeline_ingest_text",
+      "community": 3,
+      "norm_label": ".ingest_text()"
+    },
+    {
+      "label": "._process()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L127",
+      "id": "ingestion_pipeline_ingestionpipeline_process",
+      "community": 3,
+      "norm_label": "._process()"
+    },
+    {
+      "label": "._remove_source()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L179",
+      "id": "ingestion_pipeline_ingestionpipeline_remove_source",
+      "community": 3,
+      "norm_label": "._remove_source()"
+    },
+    {
+      "label": ".list_sources()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L188",
+      "id": "ingestion_pipeline_ingestionpipeline_list_sources",
+      "community": 3,
+      "norm_label": ".list_sources()"
+    },
+    {
+      "label": ".delete_source()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L204",
+      "id": "ingestion_pipeline_ingestionpipeline_delete_source",
+      "community": 3,
+      "norm_label": ".delete_source()"
+    },
+    {
+      "label": ".total_chunks()",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L207",
+      "id": "ingestion_pipeline_ingestionpipeline_total_chunks",
+      "community": 3,
+      "norm_label": ".total_chunks()"
+    },
+    {
+      "label": "Ingestion pipeline \u2014 orchestrates: load \u2192 chunk \u2192 enrich \u2192 embed \u2192 store. Idemp",
+      "file_type": "rationale",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L1",
+      "id": "ingestion_pipeline_rationale_1",
+      "community": 3,
+      "norm_label": "ingestion pipeline \u2014 orchestrates: load \u2192 chunk \u2192 enrich \u2192 embed \u2192 store. idemp"
+    },
+    {
+      "label": "Embed a batch of texts using the configured provider.",
+      "file_type": "rationale",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L39",
+      "id": "ingestion_pipeline_rationale_39",
+      "community": 3,
+      "norm_label": "embed a batch of texts using the configured provider."
+    },
+    {
+      "label": "Clear v1 chunks (no source_hash) so a fresh ingest produces a consistent corpus.",
+      "file_type": "rationale",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L66",
+      "id": "ingestion_pipeline_rationale_66",
+      "community": 3,
+      "norm_label": "clear v1 chunks (no source_hash) so a fresh ingest produces a consistent corpus."
+    },
+    {
+      "label": "Return enriched text for embedding. chunk.text stays raw (stored as document).",
+      "file_type": "rationale",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L92",
+      "id": "ingestion_pipeline_rationale_92",
+      "community": 3,
+      "norm_label": "return enriched text for embedding. chunk.text stays raw (stored as document)."
+    },
+    {
+      "label": "engine.py",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L1",
+      "id": "retrieval_engine_py",
+      "community": 4,
+      "norm_label": "engine.py"
+    },
+    {
+      "label": "SearchResult",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L25",
+      "id": "retrieval_engine_searchresult",
+      "community": 1,
+      "norm_label": "searchresult"
+    },
+    {
+      "label": "vector_search()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L34",
+      "id": "retrieval_engine_vector_search",
+      "community": 4,
+      "norm_label": "vector_search()"
+    },
+    {
+      "label": "_get_bm25_index()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L68",
+      "id": "retrieval_engine_get_bm25_index",
+      "community": 4,
+      "norm_label": "_get_bm25_index()"
+    },
+    {
+      "label": "keyword_search()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L101",
+      "id": "retrieval_engine_keyword_search",
+      "community": 4,
+      "norm_label": "keyword_search()"
+    },
+    {
+      "label": "rrf_fuse()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L127",
+      "id": "retrieval_engine_rrf_fuse",
+      "community": 4,
+      "norm_label": "rrf_fuse()"
+    },
+    {
+      "label": "_get_reranker()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L150",
+      "id": "retrieval_engine_get_reranker",
+      "community": 4,
+      "norm_label": "_get_reranker()"
+    },
+    {
+      "label": "_crossencoder_rerank()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L162",
+      "id": "retrieval_engine_crossencoder_rerank",
+      "community": 4,
+      "norm_label": "_crossencoder_rerank()"
+    },
+    {
+      "label": "_get_llm_rerank_client()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L178",
+      "id": "retrieval_engine_get_llm_rerank_client",
+      "community": 4,
+      "norm_label": "_get_llm_rerank_client()"
+    },
+    {
+      "label": "_llm_rerank()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L190",
+      "id": "retrieval_engine_llm_rerank",
+      "community": 4,
+      "norm_label": "_llm_rerank()"
+    },
+    {
+      "label": "rerank()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L221",
+      "id": "retrieval_engine_rerank",
+      "community": 4,
+      "norm_label": "rerank()"
+    },
+    {
+      "label": "hybrid_retrieve()",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L228",
+      "id": "retrieval_engine_hybrid_retrieve",
+      "community": 4,
+      "norm_label": "hybrid_retrieve()"
+    },
+    {
+      "label": "Hybrid retrieval engine combining:   1. Vector search (cosine similarity via Ch",
+      "file_type": "rationale",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L1",
+      "id": "retrieval_engine_rationale_1",
+      "community": 4,
+      "norm_label": "hybrid retrieval engine combining:   1. vector search (cosine similarity via ch"
+    },
+    {
+      "label": "Full pipeline: vector + BM25 \u2192 RRF \u2192 rerank \u2192 top results.",
+      "file_type": "rationale",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L234",
+      "id": "retrieval_engine_rationale_234",
+      "community": 4,
+      "norm_label": "full pipeline: vector + bm25 \u2192 rrf \u2192 rerank \u2192 top results."
+    },
+    {
+      "label": "Streamlit UI (app.py)",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "app_streamlit_ui",
+      "community": 0,
+      "norm_label": "streamlit ui (app.py)"
+    },
+    {
+      "label": "init_state function",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "113",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "app_init_state",
+      "community": 0,
+      "norm_label": "init_state function"
+    },
+    {
+      "label": "_run_warmup background function",
+      "file_type": "code",
+      "source_file": "app.py",
+      "source_location": "30",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "app_run_warmup",
+      "community": 4,
+      "norm_label": "_run_warmup background function"
+    },
+    {
+      "label": "Settings dataclass (config.py)",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "12",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "config_settings",
+      "community": 12,
+      "norm_label": "settings dataclass (config.py)"
+    },
+    {
+      "label": "settings singleton",
+      "file_type": "code",
+      "source_file": "config.py",
+      "source_location": "65",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "config_settings_singleton",
+      "community": 0,
+      "norm_label": "settings singleton"
+    },
+    {
+      "label": "LLMClient class",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "15",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "llm_client_LLMClient",
+      "community": 4,
+      "norm_label": "llmclient class"
+    },
+    {
+      "label": "LLMClient.generate",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "35",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "llm_client_generate",
+      "community": 0,
+      "norm_label": "llmclient.generate"
+    },
+    {
+      "label": "LLMClient.generate_with_history",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "47",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "llm_client_generate_with_history",
+      "community": 0,
+      "norm_label": "llmclient.generate_with_history"
+    },
+    {
+      "label": "LLMClient.stream_with_history",
+      "file_type": "code",
+      "source_file": "llm_client.py",
+      "source_location": "60",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "llm_client_stream_with_history",
+      "community": 0,
+      "norm_label": "llmclient.stream_with_history"
+    },
+    {
+      "label": "Orchestrator class",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "114",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_Orchestrator",
+      "community": 0,
+      "norm_label": "orchestrator class"
+    },
+    {
+      "label": "Orchestrator.process (sync)",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "118",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_process",
+      "community": 0,
+      "norm_label": "orchestrator.process (sync)"
+    },
+    {
+      "label": "Orchestrator.process_stream (streaming)",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "194",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_process_stream",
+      "community": 0,
+      "norm_label": "orchestrator.process_stream (streaming)"
+    },
+    {
+      "label": "Orchestrator._classify",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "255",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_classify",
+      "community": 0,
+      "norm_label": "orchestrator._classify"
+    },
+    {
+      "label": "Orchestrator._rewrite",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "270",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_rewrite",
+      "community": 0,
+      "norm_label": "orchestrator._rewrite"
+    },
+    {
+      "label": "Orchestrator._assess_confidence",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "281",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_assess_confidence",
+      "community": 0,
+      "norm_label": "orchestrator._assess_confidence"
+    },
+    {
+      "label": "Orchestrator._assemble_context",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "295",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_assemble_context",
+      "community": 0,
+      "norm_label": "orchestrator._assemble_context"
+    },
+    {
+      "label": "Intent enum",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "24",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_Intent",
+      "community": 0,
+      "norm_label": "intent enum"
+    },
+    {
+      "label": "Confidence enum",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "33",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_Confidence",
+      "community": 0,
+      "norm_label": "confidence enum"
+    },
+    {
+      "label": "OrchestratorResult dataclass",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "50",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_OrchestratorResult",
+      "community": 0,
+      "norm_label": "orchestratorresult dataclass"
+    },
+    {
+      "label": "_fast_classify (regex greeting classifier)",
+      "file_type": "code",
+      "source_file": "orchestrator.py",
+      "source_location": "107",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "orchestrator_fast_classify",
+      "community": 0,
+      "norm_label": "_fast_classify (regex greeting classifier)"
+    },
+    {
+      "label": "SessionStore class",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "51",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "session_store_SessionStore",
+      "community": 0,
+      "norm_label": "sessionstore class"
+    },
+    {
+      "label": "_serialize_message",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "18",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "session_store_serialize_message",
+      "community": 0,
+      "norm_label": "_serialize_message"
+    },
+    {
+      "label": "_deserialize_message",
+      "file_type": "code",
+      "source_file": "session_store.py",
+      "source_location": "34",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "session_store_deserialize_message",
+      "community": 0,
+      "norm_label": "_deserialize_message"
+    },
+    {
+      "label": "ingest.py CLI entry point",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "146",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingest_main",
+      "community": 13,
+      "norm_label": "ingest.py cli entry point"
+    },
+    {
+      "label": "ingest.run function",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "108",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingest_run",
+      "community": 0,
+      "norm_label": "ingest.run function"
+    },
+    {
+      "label": "ingest.load_urls",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "63",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingest_load_urls",
+      "community": 0,
+      "norm_label": "ingest.load_urls"
+    },
+    {
+      "label": "ingest._normalize_url",
+      "file_type": "code",
+      "source_file": "ingest.py",
+      "source_location": "21",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingest_normalize_url",
+      "community": 0,
+      "norm_label": "ingest._normalize_url"
+    },
+    {
+      "label": "IngestionPipeline class",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "108",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_pipeline_IngestionPipeline",
+      "community": 0,
+      "norm_label": "ingestionpipeline class"
+    },
+    {
+      "label": "IngestionPipeline._process",
+      "file_type": "code",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "127",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_pipeline_process",
+      "community": 3,
+      "norm_label": "ingestionpipeline._process"
+    },
+    {
+      "label": "Chunker class",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "32",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_chunker_Chunker",
+      "community": 0,
+      "norm_label": "chunker class"
+    },
+    {
+      "label": "Chunk dataclass",
+      "file_type": "code",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "19",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_chunker_Chunk",
+      "community": 0,
+      "norm_label": "chunk dataclass"
+    },
+    {
+      "label": "RawDocument dataclass",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "25",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_RawDocument",
+      "community": 0,
+      "norm_label": "rawdocument dataclass"
+    },
+    {
+      "label": "WebLoader class",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "35",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_WebLoader",
+      "community": 2,
+      "norm_label": "webloader class"
+    },
+    {
+      "label": "PDFLoader class",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "84",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_PDFLoader",
+      "community": 2,
+      "norm_label": "pdfloader class"
+    },
+    {
+      "label": "DocxLoader class",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "102",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_DocxLoader",
+      "community": 2,
+      "norm_label": "docxloader class"
+    },
+    {
+      "label": "CSVLoader class",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "138",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_CSVLoader",
+      "community": 2,
+      "norm_label": "csvloader class"
+    },
+    {
+      "label": "ExcelLoader class",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "192",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_ExcelLoader",
+      "community": 2,
+      "norm_label": "excelloader class"
+    },
+    {
+      "label": "TxtLoader class",
+      "file_type": "code",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "269",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "ingestion_loaders_TxtLoader",
+      "community": 2,
+      "norm_label": "txtloader class"
+    },
+    {
+      "label": "SearchResult dataclass",
+      "file_type": "code",
+      "source_file": "retrieval/engine.py",
+      "source_location": "25",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "retrieval_engine_SearchResult",
+      "community": 0,
+      "norm_label": "searchresult dataclass"
+    },
+    {
+      "label": "Hybrid Retrieval Pattern",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": "195",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_hybrid_retrieval",
+      "community": 4,
+      "norm_label": "hybrid retrieval pattern"
+    },
+    {
+      "label": "Parent-Child Chunk Pattern",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": "196",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_parent_child_chunks",
+      "community": 0,
+      "norm_label": "parent-child chunk pattern"
+    },
+    {
+      "label": "Confidence Gating (skip LLM on NONE)",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": "197",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_confidence_gating",
+      "community": 0,
+      "norm_label": "confidence gating (skip llm on none)"
+    },
+    {
+      "label": "Intent Classification Strategy",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": "198",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_intent_classification",
+      "community": 0,
+      "norm_label": "intent classification strategy"
+    },
+    {
+      "label": "Reciprocal Rank Fusion (RRF)",
+      "file_type": "rationale",
+      "source_file": "README.md",
+      "source_location": "173",
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_rrf_fusion",
+      "community": 4,
+      "norm_label": "reciprocal rank fusion (rrf)"
+    },
+    {
+      "label": "ChromaDB Vector Store",
+      "file_type": "rationale",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_chromadb",
+      "community": 3,
+      "norm_label": "chromadb vector store"
+    },
+    {
+      "label": "MongoDB Session Persistence",
+      "file_type": "rationale",
+      "source_file": "session_store.py",
+      "source_location": null,
+      "source_url": null,
+      "captured_at": null,
+      "author": null,
+      "contributor": null,
+      "id": "concept_mongodb_sessions",
+      "community": 0,
+      "norm_label": "mongodb session persistence"
+    }
+  ],
+  "links": [
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L30",
+      "weight": 1.0,
+      "source": "app_py",
+      "target": "lucid_bouman_34e0b7_app_run_warmup",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "app_py",
+      "target": "lucid_bouman_34e0b7_app_new_session_id",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "app_py",
+      "target": "lucid_bouman_34e0b7_app_init_state",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_app_rationale_1",
+      "target": "app_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "app.py",
+      "source_location": "L159",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_app_init_state",
+      "target": "lucid_bouman_34e0b7_app_new_session_id",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app.py",
+      "source_location": "L117",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_app_init_state",
+      "target": "ingestion_pipeline_ingestionpipeline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_app_init_state",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app.py",
+      "source_location": "L128",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_app_init_state",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "app.py",
+      "source_location": "L145",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_app_init_state",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L12",
+      "weight": 1.0,
+      "source": "config_py",
+      "target": "lucid_bouman_34e0b7_config_settings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "config.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_config_rationale_1",
+      "target": "config_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L21",
+      "weight": 1.0,
+      "source": "ingest_py",
+      "target": "lucid_bouman_34e0b7_ingest_normalize_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "ingest_py",
+      "target": "lucid_bouman_34e0b7_ingest_log_result",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L63",
+      "weight": 1.0,
+      "source": "ingest_py",
+      "target": "lucid_bouman_34e0b7_ingest_load_urls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L97",
+      "weight": 1.0,
+      "source": "ingest_py",
+      "target": "lucid_bouman_34e0b7_ingest_load_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "ingest_py",
+      "target": "lucid_bouman_34e0b7_ingest_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L146",
+      "weight": 1.0,
+      "source": "ingest_py",
+      "target": "lucid_bouman_34e0b7_ingest_main",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_rationale_1",
+      "target": "ingest_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_load_urls",
+      "target": "lucid_bouman_34e0b7_ingest_normalize_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L22",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_rationale_22",
+      "target": "lucid_bouman_34e0b7_ingest_normalize_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_run",
+      "target": "lucid_bouman_34e0b7_ingest_log_result",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L154",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_main",
+      "target": "lucid_bouman_34e0b7_ingest_load_urls",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_main",
+      "target": "lucid_bouman_34e0b7_ingest_load_files",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingest.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_main",
+      "target": "lucid_bouman_34e0b7_ingest_run",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingest.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_run",
+      "target": "ingestion_pipeline_ingestionpipeline"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingest.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_ingest_run",
+      "target": "str"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_client.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "llm_client_py",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_client.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_llm_client_rationale_1",
+      "target": "llm_client_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_client.py",
+      "source_location": "L16",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_client.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient_generate",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_client.py",
+      "source_location": "L47",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient_generate_with_history",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "llm_client.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient_stream_with_history",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_intent",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L17",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L182",
+      "weight": 0.8,
+      "source": "retrieval_engine_searchresult",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "retrieval/engine.py",
+      "source_location": "L183",
+      "weight": 1.0,
+      "source": "retrieval_engine_get_llm_rerank_client",
+      "target": "lucid_bouman_34e0b7_llm_client_llmclient"
+    },
+    {
+      "relation": "imports_from",
+      "context": "import",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L13",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "enum",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_intent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L107",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L282",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L296",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L316",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L331",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_build_messages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L339",
+      "weight": 1.0,
+      "source": "orchestrator_py",
+      "target": "lucid_bouman_34e0b7_orchestrator_history_text",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_rationale_1",
+      "target": "orchestrator_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_intent",
+      "target": "str",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_intent",
+      "target": "enum",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L265",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "target": "lucid_bouman_34e0b7_orchestrator_intent",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_intent",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "target": "str",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L156",
+      "weight": 1.0,
+      "source": "ingestion_loaders_csvloader_load",
+      "target": "str"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "source": "ingestion_loaders_excelloader_load",
+      "target": "str"
+    },
+    {
+      "relation": "inherits",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "target": "enum",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "session_store.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "target": "lucid_bouman_34e0b7_orchestrator_confidence",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "session_store.py",
+      "source_location": "L41",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_deserialize_message",
+      "target": "lucid_bouman_34e0b7_orchestrator_confidence"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L223",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "session_store.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestratorresult",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "session_store.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_deserialize_message",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestratorresult"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L256",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "target": "lucid_bouman_34e0b7_orchestrator_fast_classify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L115",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L194",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L255",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L270",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "orchestrator.py",
+      "source_location": "L18",
+      "weight": 0.8,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L122",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_history_text",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L143",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L176",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L184",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_build_messages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L187",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L206",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_rationale_119",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "orchestrator.py",
+      "source_location": "L148",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process",
+      "target": "retrieval_engine_hybrid_retrieve"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L200",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_history_text",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L202",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_classify",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L211",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_rewrite",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L213",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_assess_confidence",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L236",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_assemble_context",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L241",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_build_messages",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L249",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "lucid_bouman_34e0b7_orchestrator_extract_sources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "orchestrator.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_rationale_195",
+      "target": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "orchestrator.py",
+      "source_location": "L212",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_orchestrator_orchestrator_process_stream",
+      "target": "retrieval_engine_hybrid_retrieve"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L18",
+      "weight": 1.0,
+      "source": "session_store_py",
+      "target": "lucid_bouman_34e0b7_session_store_serialize_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "session_store_py",
+      "target": "lucid_bouman_34e0b7_session_store_deserialize_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L51",
+      "weight": 1.0,
+      "source": "session_store_py",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_rationale_1",
+      "target": "session_store_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L81",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "target": "lucid_bouman_34e0b7_session_store_serialize_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L19",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_rationale_19",
+      "target": "lucid_bouman_34e0b7_session_store_serialize_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "target": "lucid_bouman_34e0b7_session_store_deserialize_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_rationale_35",
+      "target": "lucid_bouman_34e0b7_session_store_deserialize_message",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L52",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L60",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L74",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_sessionstore",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore_delete",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L61",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_rationale_61",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore_load_all",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "session_store.py",
+      "source_location": "L75",
+      "weight": 1.0,
+      "source": "lucid_bouman_34e0b7_session_store_rationale_75",
+      "target": "lucid_bouman_34e0b7_session_store_sessionstore_save",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_settings_json",
+      "target": "claude_settings_statusline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_settings_statusline",
+      "target": "claude_settings_statusline_type",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.json",
+      "source_location": "L4",
+      "weight": 1.0,
+      "source": "claude_settings_statusline",
+      "target": "claude_settings_statusline_command",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L2",
+      "weight": 1.0,
+      "source": "claude_settings_local_json",
+      "target": "claude_settings_local_permissions",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": ".claude/settings.local.json",
+      "source_location": "L3",
+      "weight": 1.0,
+      "source": "claude_settings_local_permissions",
+      "target": "claude_settings_local_permissions_allow",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L15",
+      "weight": 1.0,
+      "source": "ingestion_chunker_py",
+      "target": "ingestion_chunker_approx_tokens",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L20",
+      "weight": 1.0,
+      "source": "ingestion_chunker_py",
+      "target": "ingestion_chunker_chunk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L27",
+      "weight": 1.0,
+      "source": "ingestion_chunker_py",
+      "target": "ingestion_chunker_content_hash",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L32",
+      "weight": 1.0,
+      "source": "ingestion_chunker_py",
+      "target": "ingestion_chunker_chunker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L76",
+      "weight": 1.0,
+      "source": "ingestion_chunker_py",
+      "target": "ingestion_chunker_make",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ingestion_chunker_rationale_1",
+      "target": "ingestion_chunker_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "ingestion_chunker_chunker_chunk_section",
+      "target": "ingestion_chunker_approx_tokens",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "ingestion_chunker_chunk",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_chunker_chunk",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L33",
+      "weight": 1.0,
+      "source": "ingestion_chunker_chunker",
+      "target": "ingestion_chunker_chunker_chunk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L49",
+      "weight": 1.0,
+      "source": "ingestion_chunker_chunker",
+      "target": "ingestion_chunker_chunker_chunk_section",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L10",
+      "weight": 0.8,
+      "source": "ingestion_chunker_chunker",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L13",
+      "weight": 0.8,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_chunker_chunker",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L110",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_init",
+      "target": "ingestion_chunker_chunker"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L42",
+      "weight": 1.0,
+      "source": "ingestion_chunker_chunker_chunk",
+      "target": "ingestion_chunker_chunker_chunk_section",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L78",
+      "weight": 1.0,
+      "source": "ingestion_chunker_make",
+      "target": "ingestion_chunker_chunker_chunk",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/chunker.py",
+      "source_location": "L58",
+      "weight": 1.0,
+      "source": "ingestion_chunker_chunker_chunk_section",
+      "target": "ingestion_chunker_make",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L31",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_content_hash",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L35",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_webloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L84",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_pdfloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L102",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_docxloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L138",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_csvloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L182",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_read",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L192",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_excelloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L269",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_txtloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L286",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_textloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L299",
+      "weight": 1.0,
+      "source": "ingestion_loaders_py",
+      "target": "ingestion_loaders_get_loader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ingestion_loaders_rationale_1",
+      "target": "ingestion_loaders_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L56",
+      "weight": 1.0,
+      "source": "ingestion_loaders_webloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L94",
+      "weight": 1.0,
+      "source": "ingestion_loaders_pdfloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L130",
+      "weight": 1.0,
+      "source": "ingestion_loaders_docxloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L144",
+      "weight": 1.0,
+      "source": "ingestion_loaders_csvloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L256",
+      "weight": 1.0,
+      "source": "ingestion_loaders_excelloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L274",
+      "weight": 1.0,
+      "source": "ingestion_loaders_txtloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L291",
+      "weight": 1.0,
+      "source": "ingestion_loaders_textloader_load",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_loaders_rawdocument",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "ingestion_loaders_webloader",
+      "target": "ingestion_loaders_webloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L67",
+      "weight": 1.0,
+      "source": "ingestion_loaders_webloader",
+      "target": "ingestion_loaders_webloader_extract_sections",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L302",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_webloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L46",
+      "weight": 1.0,
+      "source": "ingestion_loaders_webloader_load",
+      "target": "ingestion_loaders_webloader_extract_sections",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L85",
+      "weight": 1.0,
+      "source": "ingestion_loaders_pdfloader",
+      "target": "ingestion_loaders_pdfloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L304",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_pdfloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L103",
+      "weight": 1.0,
+      "source": "ingestion_loaders_docxloader",
+      "target": "ingestion_loaders_docxloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L306",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_docxloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L141",
+      "weight": 1.0,
+      "source": "ingestion_loaders_csvloader",
+      "target": "ingestion_loaders_csvloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L308",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_csvloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L142",
+      "weight": 1.0,
+      "source": "ingestion_loaders_csvloader_load",
+      "target": "ingestion_loaders_read",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L195",
+      "weight": 1.0,
+      "source": "ingestion_loaders_excelloader",
+      "target": "ingestion_loaders_excelloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L310",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_excelloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L270",
+      "weight": 1.0,
+      "source": "ingestion_loaders_txtloader",
+      "target": "ingestion_loaders_txtloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L312",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_txtloader",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/loaders.py",
+      "source_location": "L288",
+      "weight": 1.0,
+      "source": "ingestion_loaders_textloader",
+      "target": "ingestion_loaders_textloader_load",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "uses",
+      "confidence": "INFERRED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L12",
+      "weight": 0.8,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_loaders_textloader",
+      "confidence_score": 0.5
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L124",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_ingest_text",
+      "target": "ingestion_loaders_textloader"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L114",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_ingest_url",
+      "target": "ingestion_loaders_get_loader"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "INFERRED",
+      "confidence_score": 0.8,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L119",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_ingest_file",
+      "target": "ingestion_loaders_get_loader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "114",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_IngestionPipeline",
+      "target": "ingestion_loaders_get_loader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "301",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_WebLoader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "303",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_PDFLoader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "305",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_DocxLoader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "307",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_CSVLoader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "309",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_ExcelLoader"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/loaders.py",
+      "source_location": "311",
+      "weight": 1.0,
+      "source": "ingestion_loaders_get_loader",
+      "target": "ingestion_loaders_TxtLoader"
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L24",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_py",
+      "target": "ingestion_pipeline_get_embed_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L38",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_py",
+      "target": "ingestion_pipeline_get_embeddings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L50",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_py",
+      "target": "ingestion_pipeline_get_collection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L65",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_py",
+      "target": "ingestion_pipeline_migrate_schema_if_needed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L91",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_py",
+      "target": "ingestion_pipeline_enrich",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L108",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_py",
+      "target": "ingestion_pipeline_ingestionpipeline",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_rationale_1",
+      "target": "ingestion_pipeline_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L40",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_get_embeddings",
+      "target": "ingestion_pipeline_get_embed_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L157",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_process",
+      "target": "ingestion_pipeline_get_embeddings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L39",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_rationale_39",
+      "target": "ingestion_pipeline_get_embeddings",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py",
+      "source_location": "35",
+      "weight": 1.0,
+      "source": "retrieval_engine_vector_search",
+      "target": "ingestion_pipeline_get_embeddings"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "157",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_process",
+      "target": "ingestion_pipeline_get_embeddings"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "43",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_get_embeddings",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_init",
+      "target": "ingestion_pipeline_get_collection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L131",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_process",
+      "target": "ingestion_pipeline_get_collection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L180",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_remove_source",
+      "target": "ingestion_pipeline_get_collection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L189",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_list_sources",
+      "target": "ingestion_pipeline_get_collection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L209",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_total_chunks",
+      "target": "ingestion_pipeline_get_collection",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py",
+      "source_location": "36",
+      "weight": 1.0,
+      "source": "retrieval_engine_vector_search",
+      "target": "ingestion_pipeline_get_collection"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py",
+      "source_location": "71",
+      "weight": 1.0,
+      "source": "retrieval_engine_get_bm25_index",
+      "target": "ingestion_pipeline_get_collection"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "111",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_IngestionPipeline",
+      "target": "ingestion_pipeline_get_collection"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "55",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_get_collection",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "50",
+      "weight": 0.85,
+      "source": "concept_chromadb",
+      "target": "ingestion_pipeline_get_collection"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L111",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_init",
+      "target": "ingestion_pipeline_migrate_schema_if_needed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L66",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_rationale_66",
+      "target": "ingestion_pipeline_migrate_schema_if_needed",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L153",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_process",
+      "target": "ingestion_pipeline_enrich",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L92",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_rationale_92",
+      "target": "ingestion_pipeline_enrich",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "153",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_process",
+      "target": "ingestion_pipeline_enrich"
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L109",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_init",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L113",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_ingest_url",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L118",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_ingest_file",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L123",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_ingest_text",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L179",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_remove_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L188",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_list_sources",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L204",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_delete_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "method",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L207",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline",
+      "target": "ingestion_pipeline_ingestionpipeline_total_chunks",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_ingest_url",
+      "target": "ingestion_pipeline_ingestionpipeline_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L121",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_ingest_file",
+      "target": "ingestion_pipeline_ingestionpipeline_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L125",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_ingest_text",
+      "target": "ingestion_pipeline_ingestionpipeline_process",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L155",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_process",
+      "target": "ingestion_pipeline_ingestionpipeline_remove_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "L205",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_ingestionpipeline_delete_source",
+      "target": "ingestion_pipeline_ingestionpipeline_remove_source",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L25",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L34",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_vector_search",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L68",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_get_bm25_index",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L101",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_keyword_search",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L127",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_rrf_fuse",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L150",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_get_reranker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L162",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_crossencoder_rerank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L178",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_get_llm_rerank_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L190",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_llm_rerank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L221",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_rerank",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "contains",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L228",
+      "weight": 1.0,
+      "source": "retrieval_engine_py",
+      "target": "retrieval_engine_hybrid_retrieve",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L1",
+      "weight": 1.0,
+      "source": "retrieval_engine_rationale_1",
+      "target": "retrieval_engine_py",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L54",
+      "weight": 1.0,
+      "source": "retrieval_engine_vector_search",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L116",
+      "weight": 1.0,
+      "source": "retrieval_engine_keyword_search",
+      "target": "retrieval_engine_searchresult",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "238",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_hybrid_retrieve",
+      "target": "retrieval_engine_vector_search"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "102",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_keyword_search",
+      "target": "retrieval_engine_get_bm25_index"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "37",
+      "weight": 1.0,
+      "source": "app_run_warmup",
+      "target": "retrieval_engine_get_bm25_index"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "239",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_hybrid_retrieve",
+      "target": "retrieval_engine_keyword_search"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "240",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_hybrid_retrieve",
+      "target": "retrieval_engine_rrf_fuse"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": "173",
+      "weight": 0.95,
+      "source": "concept_rrf_fusion",
+      "target": "retrieval_engine_rrf_fuse"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L163",
+      "weight": 1.0,
+      "source": "retrieval_engine_crossencoder_rerank",
+      "target": "retrieval_engine_get_reranker",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "224",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_rerank",
+      "target": "retrieval_engine_crossencoder_rerank"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L191",
+      "weight": 1.0,
+      "source": "retrieval_engine_llm_rerank",
+      "target": "retrieval_engine_get_llm_rerank_client",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "223",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_rerank",
+      "target": "retrieval_engine_llm_rerank"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py",
+      "source_location": "183",
+      "weight": 1.0,
+      "source": "retrieval_engine_llm_rerank",
+      "target": "llm_client_LLMClient"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py",
+      "source_location": "203",
+      "weight": 1.0,
+      "source": "retrieval_engine_llm_rerank",
+      "target": "llm_client_generate"
+    },
+    {
+      "relation": "calls",
+      "context": "call",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "247",
+      "weight": 1.0,
+      "confidence_score": 1.0,
+      "source": "retrieval_engine_hybrid_retrieve",
+      "target": "retrieval_engine_rerank"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py",
+      "source_location": "222",
+      "weight": 1.0,
+      "source": "retrieval_engine_rerank",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "EXTRACTED",
+      "source_file": "retrieval/engine.py",
+      "source_location": "L234",
+      "weight": 1.0,
+      "source": "retrieval_engine_rationale_234",
+      "target": "retrieval_engine_hybrid_retrieve",
+      "confidence_score": 1.0
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "148",
+      "weight": 1.0,
+      "source": "orchestrator_process",
+      "target": "retrieval_engine_hybrid_retrieve"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "212",
+      "weight": 1.0,
+      "source": "orchestrator_process_stream",
+      "target": "retrieval_engine_hybrid_retrieve"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "retrieval/engine.py",
+      "source_location": "228",
+      "weight": 0.95,
+      "source": "retrieval_engine_hybrid_retrieve",
+      "target": "concept_hybrid_retrieval"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "330",
+      "weight": 1.0,
+      "source": "app_streamlit_ui",
+      "target": "orchestrator_process_stream"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "366",
+      "weight": 1.0,
+      "source": "app_streamlit_ui",
+      "target": "session_store_SessionStore"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "334",
+      "weight": 1.0,
+      "source": "app_streamlit_ui",
+      "target": "orchestrator_OrchestratorResult"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "15",
+      "weight": 1.0,
+      "source": "app_streamlit_ui",
+      "target": "orchestrator_Confidence"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "117",
+      "weight": 1.0,
+      "source": "app_init_state",
+      "target": "ingestion_pipeline_IngestionPipeline"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "127",
+      "weight": 1.0,
+      "source": "app_init_state",
+      "target": "llm_client_LLMClient"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "128",
+      "weight": 1.0,
+      "source": "app_init_state",
+      "target": "orchestrator_Orchestrator"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "145",
+      "weight": 1.0,
+      "source": "app_init_state",
+      "target": "session_store_SessionStore"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "app.py",
+      "source_location": "35",
+      "weight": 1.0,
+      "source": "app_run_warmup",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "287",
+      "weight": 1.0,
+      "source": "orchestrator_assess_confidence",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "308",
+      "weight": 1.0,
+      "source": "orchestrator_assemble_context",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "session_store.py",
+      "source_location": "53",
+      "weight": 1.0,
+      "source": "session_store_SessionStore",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/chunker.py",
+      "source_location": "57",
+      "weight": 1.0,
+      "source": "ingestion_chunker_Chunker",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "llm_client.py",
+      "source_location": "17",
+      "weight": 1.0,
+      "source": "llm_client_LLMClient",
+      "target": "config_settings_singleton"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "260",
+      "weight": 1.0,
+      "source": "orchestrator_classify",
+      "target": "llm_client_generate"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "272",
+      "weight": 1.0,
+      "source": "orchestrator_rewrite",
+      "target": "llm_client_generate"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "185",
+      "weight": 1.0,
+      "source": "orchestrator_process",
+      "target": "llm_client_generate_with_history"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "244",
+      "weight": 1.0,
+      "source": "orchestrator_process_stream",
+      "target": "llm_client_stream_with_history"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "188",
+      "weight": 1.0,
+      "source": "orchestrator_Orchestrator",
+      "target": "orchestrator_OrchestratorResult"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "129",
+      "weight": 1.0,
+      "source": "orchestrator_Orchestrator",
+      "target": "orchestrator_Intent"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "153",
+      "weight": 1.0,
+      "source": "orchestrator_Orchestrator",
+      "target": "orchestrator_Confidence"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "orchestrator.py",
+      "source_location": "156",
+      "weight": 0.95,
+      "source": "orchestrator_Orchestrator",
+      "target": "concept_confidence_gating"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "orchestrator.py",
+      "source_location": "125",
+      "weight": 0.95,
+      "source": "orchestrator_Orchestrator",
+      "target": "concept_intent_classification"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "125",
+      "weight": 1.0,
+      "source": "orchestrator_process",
+      "target": "orchestrator_classify"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "143",
+      "weight": 1.0,
+      "source": "orchestrator_process",
+      "target": "orchestrator_rewrite"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "153",
+      "weight": 1.0,
+      "source": "orchestrator_process",
+      "target": "orchestrator_assess_confidence"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "176",
+      "weight": 1.0,
+      "source": "orchestrator_process",
+      "target": "orchestrator_assemble_context"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "202",
+      "weight": 1.0,
+      "source": "orchestrator_process_stream",
+      "target": "orchestrator_classify"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "213",
+      "weight": 1.0,
+      "source": "orchestrator_process_stream",
+      "target": "orchestrator_assess_confidence"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "236",
+      "weight": 1.0,
+      "source": "orchestrator_process_stream",
+      "target": "orchestrator_assemble_context"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py",
+      "source_location": "256",
+      "weight": 1.0,
+      "source": "orchestrator_classify",
+      "target": "orchestrator_fast_classify"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": "198",
+      "weight": 0.95,
+      "source": "concept_intent_classification",
+      "target": "orchestrator_classify"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": "197",
+      "weight": 0.95,
+      "source": "concept_confidence_gating",
+      "target": "orchestrator_assess_confidence"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "session_store.py",
+      "source_location": "39",
+      "weight": 1.0,
+      "source": "session_store_SessionStore",
+      "target": "orchestrator_OrchestratorResult"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "session_store.py",
+      "source_location": "21",
+      "weight": 1.0,
+      "source": "session_store_serialize_message",
+      "target": "orchestrator_OrchestratorResult"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "session_store.py",
+      "source_location": "39",
+      "weight": 1.0,
+      "source": "session_store_deserialize_message",
+      "target": "orchestrator_OrchestratorResult"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "orchestrator.py",
+      "source_location": "187",
+      "weight": 0.95,
+      "source": "retrieval_engine_SearchResult",
+      "target": "orchestrator_OrchestratorResult"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "session_store.py",
+      "source_location": "51",
+      "weight": 0.85,
+      "source": "concept_mongodb_sessions",
+      "target": "session_store_SessionStore"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingest.py",
+      "source_location": "115",
+      "weight": 1.0,
+      "source": "ingest_run",
+      "target": "ingestion_pipeline_IngestionPipeline"
+    },
+    {
+      "relation": "calls",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "ingest.py",
+      "source_location": "154",
+      "weight": 0.95,
+      "source": "ingest_run",
+      "target": "ingest_load_urls"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingest.py",
+      "source_location": "75",
+      "weight": 1.0,
+      "source": "ingest_load_urls",
+      "target": "ingest_normalize_url"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "110",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_IngestionPipeline",
+      "target": "ingestion_chunker_Chunker"
+    },
+    {
+      "relation": "implements",
+      "confidence": "INFERRED",
+      "confidence_score": 0.85,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "166",
+      "weight": 0.85,
+      "source": "ingestion_pipeline_IngestionPipeline",
+      "target": "concept_parent_child_chunks"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py",
+      "source_location": "148",
+      "weight": 1.0,
+      "source": "ingestion_pipeline_process",
+      "target": "ingestion_chunker_Chunker"
+    },
+    {
+      "relation": "references",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/chunker.py",
+      "source_location": "33",
+      "weight": 1.0,
+      "source": "ingestion_chunker_Chunker",
+      "target": "ingestion_loaders_RawDocument"
+    },
+    {
+      "relation": "calls",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/chunker.py",
+      "source_location": "78",
+      "weight": 1.0,
+      "source": "ingestion_chunker_Chunker",
+      "target": "ingestion_chunker_Chunk"
+    },
+    {
+      "relation": "rationale_for",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "README.md",
+      "source_location": "196",
+      "weight": 0.95,
+      "source": "concept_parent_child_chunks",
+      "target": "ingestion_chunker_Chunker"
+    },
+    {
+      "relation": "shares_data_with",
+      "confidence": "INFERRED",
+      "confidence_score": 0.95,
+      "source_file": "ingestion/chunker.py",
+      "source_location": "33",
+      "weight": 0.95,
+      "source": "ingestion_chunker_Chunk",
+      "target": "ingestion_loaders_RawDocument"
+    }
+  ],
+  "hyperedges": [
+    {
+      "id": "ingestion_pipeline_flow",
+      "label": "Ingestion Pipeline: load -> chunk -> enrich -> embed -> store",
+      "nodes": [
+        "ingestion_loaders_get_loader",
+        "ingestion_chunker_Chunker",
+        "ingestion_pipeline_enrich",
+        "ingestion_pipeline_get_embeddings",
+        "ingestion_pipeline_get_collection"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "ingestion/pipeline.py"
+    },
+    {
+      "id": "rag_query_flow",
+      "label": "RAG Query Flow: intent -> rewrite -> retrieve -> confidence -> generate",
+      "nodes": [
+        "orchestrator_classify",
+        "orchestrator_rewrite",
+        "retrieval_engine_hybrid_retrieve",
+        "orchestrator_assess_confidence",
+        "orchestrator_assemble_context",
+        "llm_client_stream_with_history"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "orchestrator.py"
+    },
+    {
+      "id": "hybrid_retrieval_subsystem",
+      "label": "Hybrid Retrieval: vector + BM25 + RRF + rerank",
+      "nodes": [
+        "retrieval_engine_vector_search",
+        "retrieval_engine_keyword_search",
+        "retrieval_engine_rrf_fuse",
+        "retrieval_engine_rerank"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "retrieval/engine.py"
+    },
+    {
+      "id": "session_persistence_group",
+      "label": "Session Persistence: save/load/delete via MongoDB",
+      "nodes": [
+        "session_store_SessionStore",
+        "session_store_serialize_message",
+        "session_store_deserialize_message"
+      ],
+      "relation": "implement",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "session_store.py"
+    },
+    {
+      "id": "config_consumers",
+      "label": "All modules consuming Settings singleton",
+      "nodes": [
+        "llm_client_LLMClient",
+        "orchestrator_assess_confidence",
+        "orchestrator_assemble_context",
+        "ingestion_chunker_Chunker",
+        "ingestion_pipeline_get_embeddings",
+        "ingestion_pipeline_get_collection",
+        "retrieval_engine_rerank",
+        "session_store_SessionStore"
+      ],
+      "relation": "participate_in",
+      "confidence": "EXTRACTED",
+      "confidence_score": 1.0,
+      "source_file": "config.py"
+    }
+  ],
+  "built_at_commit": "8733f349b3ff51c67de47b2b8ec47ad0ead28663"
+}

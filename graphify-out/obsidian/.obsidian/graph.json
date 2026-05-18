@@ -1,0 +1,156 @@
+{
+  "collapse-filter": false,
+  "search": "-file:graph.canvas",
+  "showTags": false,
+  "showAttachments": false,
+  "hideUnresolved": true,
+  "showOrphans": true,
+  "collapse-color-groups": true,
+  "colorGroups": [
+    {
+      "query": "tag:#community/Streamlit_UI_&_App_Logic",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
+      }
+    },
+    {
+      "query": "tag:#community/LLM_Client_&_API",
+      "color": {
+        "a": 1,
+        "rgb": 15896107
+      }
+    },
+    {
+      "query": "tag:#community/Document_Loaders",
+      "color": {
+        "a": 1,
+        "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/ChromaDB_&_Embeddings",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
+      }
+    },
+    {
+      "query": "tag:#community/Hybrid_Retrieval_&_Reranking",
+      "color": {
+        "a": 1,
+        "rgb": 5873999
+      }
+    },
+    {
+      "query": "tag:#community/App_Entry_&_Session_Init",
+      "color": {
+        "a": 1,
+        "rgb": 15583560
+      }
+    },
+    {
+      "query": "tag:#community/Text_Chunker",
+      "color": {
+        "a": 1,
+        "rgb": 11565729
+      }
+    },
+    {
+      "query": "tag:#community/Ingest_CLI_Pipeline",
+      "color": {
+        "a": 1,
+        "rgb": 16752039
+      }
+    },
+    {
+      "query": "tag:#community/Claude_Settings",
+      "color": {
+        "a": 1,
+        "rgb": 10253663
+      }
+    },
+    {
+      "query": "tag:#community/Local_Permissions_Config",
+      "color": {
+        "a": 1,
+        "rgb": 12234924
+      }
+    },
+    {
+      "query": "tag:#community/Settings_Config",
+      "color": {
+        "a": 1,
+        "rgb": 5142951
+      }
+    },
+    {
+      "query": "tag:#community/Statusline_Script",
+      "color": {
+        "a": 1,
+        "rgb": 15896107
+      }
+    },
+    {
+      "query": "tag:#community/Settings_Dataclass",
+      "color": {
+        "a": 1,
+        "rgb": 14767961
+      }
+    },
+    {
+      "query": "tag:#community/CLI_Entry_Point",
+      "color": {
+        "a": 1,
+        "rgb": 7780274
+      }
+    },
+    {
+      "query": "_community",
+      "color": {
+        "a": 1,
+        "rgb": 2837189
+      }
+    },
+    {
+      "query": "vector",
+      "color": {
+        "a": 1,
+        "rgb": 9689198
+      }
+    },
+    {
+      "query": "intent",
+      "color": {
+        "a": 1,
+        "rgb": 8632270
+      }
+    },
+    {
+      "query": "chunk",
+      "color": {
+        "a": 1,
+        "rgb": 16247923
+      }
+    },
+    {
+      "query": ".",
+      "color": {
+        "a": 1,
+        "rgb": 3456172
+      }
+    }
+  ],
+  "collapse-display": false,
+  "showArrow": false,
+  "textFadeMultiplier": -0.5,
+  "nodeSizeMultiplier": 1.23366585383876,
+  "lineSizeMultiplier": 0.839725116382177,
+  "collapse-forces": false,
+  "centerStrength": 0.628611542156211,
+  "repelStrength": 20,
+  "linkStrength": 0.699549249981527,
+  "linkDistance": 116,
+  "scale": 0.9999999999999957,
+  "close": false
+}

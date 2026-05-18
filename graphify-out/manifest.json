@@ -1,0 +1,77 @@
+{
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\app.py": {
+    "mtime": 1778958762.8760242,
+    "ast_hash": "79672a1013571d2c46a454a4e5712a71",
+    "semantic_hash": "79672a1013571d2c46a454a4e5712a71"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\config.py": {
+    "mtime": 1778958762.8769343,
+    "ast_hash": "1d5e0c92f6577125ee154c4b253ef950",
+    "semantic_hash": "1d5e0c92f6577125ee154c4b253ef950"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\ingest.py": {
+    "mtime": 1778958762.8797555,
+    "ast_hash": "c5627cb2e21566e73810fa369b483bef",
+    "semantic_hash": "c5627cb2e21566e73810fa369b483bef"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\llm_client.py": {
+    "mtime": 1778958762.8873408,
+    "ast_hash": "baf6eddb6509a2ad45baee4bd554799a",
+    "semantic_hash": "baf6eddb6509a2ad45baee4bd554799a"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\orchestrator.py": {
+    "mtime": 1778958762.8893414,
+    "ast_hash": "bab51ff0483f0737aaf7e27933101c93",
+    "semantic_hash": "bab51ff0483f0737aaf7e27933101c93"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\session_store.py": {
+    "mtime": 1778958762.8925316,
+    "ast_hash": "2c5138222057b8539544d768198e8279",
+    "semantic_hash": "2c5138222057b8539544d768198e8279"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\.claude\\settings.json": {
+    "mtime": 1778958762.7329543,
+    "ast_hash": "f67356832d1a33e15337467017385953",
+    "semantic_hash": "f67356832d1a33e15337467017385953"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\.claude\\settings.local.json": {
+    "mtime": 1778958762.7329543,
+    "ast_hash": "be2726e1fd2aef908a533ca84dd8f98e",
+    "semantic_hash": "be2726e1fd2aef908a533ca84dd8f98e"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\.claude\\statusline-command.sh": {
+    "mtime": 1778958762.7329543,
+    "ast_hash": "67dc46a2af4ef875c31c6007bb8c7fd4",
+    "semantic_hash": "67dc46a2af4ef875c31c6007bb8c7fd4"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\ingestion\\chunker.py": {
+    "mtime": 1778958762.8823268,
+    "ast_hash": "1ff7ead82ec703dafd4e7f46540426a9",
+    "semantic_hash": "1ff7ead82ec703dafd4e7f46540426a9"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\ingestion\\loaders.py": {
+    "mtime": 1778958762.8853455,
+    "ast_hash": "925ce91fcb99881a20b5c8455ae98d06",
+    "semantic_hash": "925ce91fcb99881a20b5c8455ae98d06"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\ingestion\\pipeline.py": {
+    "mtime": 1778958762.8863413,
+    "ast_hash": "8f55793f95bdd7737b78cf874e28aef8",
+    "semantic_hash": "8f55793f95bdd7737b78cf874e28aef8"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\retrieval\\engine.py": {
+    "mtime": 1778958762.8915198,
+    "ast_hash": "7524feac1b016c1495e28b19e4e9247d",
+    "semantic_hash": "7524feac1b016c1495e28b19e4e9247d"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\README.md": {
+    "mtime": 1778958762.8633242,
+    "ast_hash": "51b246f88e1361d0c5f1d423d47433f8",
+    "semantic_hash": "51b246f88e1361d0c5f1d423d47433f8"
+  },
+  "D:\\projects\\rag_chatbot\\.claude\\worktrees\\lucid-bouman-34e0b7\\requirements.txt": {
+    "mtime": 1778958762.890837,
+    "ast_hash": "b342d3ca68fb72a20e7fb52df03176f7",
+    "semantic_hash": "b342d3ca68fb72a20e7fb52df03176f7"
+  }
+}
