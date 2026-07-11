@@ -67,5 +67,12 @@ class Settings:
     context_tokens: int = 3000
     history_tokens: int = 1000
 
+    # ========== CONFLUENCE INTEGRATION ==========
+    confluence_enabled: bool = field(default_factory=lambda: os.getenv("CONFLUENCE_ENABLED", "true").lower() == "true")
+    confluence_spaces: list = field(default_factory=lambda: [s.strip() for s in os.getenv("CONFLUENCE_SPACES", "").split(",") if s.strip()])
+    confluence_sync_interval_minutes: int = field(default_factory=lambda: int(os.getenv("CONFLUENCE_SYNC_INTERVAL", "5")))
+    confluence_tracking_db: str = field(default_factory=lambda: os.getenv("CONFLUENCE_TRACKING_DB", "data/confluence_sync.db"))
+    confluence_rate_limit_per_second: float = field(default_factory=lambda: float(os.getenv("CONFLUENCE_RATE_LIMIT", "10")))
+
 
 settings = Settings()

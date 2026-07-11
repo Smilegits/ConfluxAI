@@ -124,6 +124,64 @@ class IngestionPipeline:
         doc = TextLoader().load(text, title)
         return self._process(doc, f"text:{title}")
 
+    def ingest_confluence_pages(self, pages: list[RawDocument]) -> dict:
+        """
+        Ingest Confluence pages into RAG system.
+
+        Each page is processed through the standard pipeline:
+        chunking → enrichment → embedding → storage.
+
+        Idempotency: If page content hasn't changed (same content_hash),
+        it's skipped to avoid re-embedding.
+
+        Args:
+            pages: List of RawDocument objects from ConfluenceLoader
+
+        Returns:
+            Dict with ingestion statistics:
+            - processed: Number of pages successfully processed
+            - skipped: Number of pages skipped (unchanged content)
+            - chunks_created: Total chunks created across all pages
+            - errors: Number of pages that failed to ingest
+        """
+        results = {
+            'processed': 0,
+            'skipped': 0,
+            'chunks_created': 0,
+            'errors': 0
+        }
+
+        for page in pages:
+            try:
+                page_id = page.metadata.get('page_id')
+                space_key = page.metadata.get('space_key')
+                title = page.metadata.get('title', 'Unknown')
+
+                # Use page_id as unique source key to track across syncs
+                source_key = f"confluence:{space_key}:{page_id}"
+
+                # Process through standard pipeline
+                result = self._process(page, source_key)
+
+                if result['status'] == 'ok':
+                    results['processed'] += 1
+                    results['chunks_created'] += result['chunks']
+                elif result['status'] == 'skipped':
+                    results['skipped'] += 1
+                else:
+                    results['processed'] += 1
+
+                logger.info(
+                    f"Ingested Confluence page: {space_key}/{title} "
+                    f"[{result['chunks']} chunks, status={result['status']}]"
+                )
+
+            except Exception as e:
+                logger.error(f"Failed to ingest Confluence page: {e}", exc_info=True)
+                results['errors'] += 1
+
+        return results
+
     def _process(self, doc: RawDocument, source_key: str) -> dict:
         if not doc.text.strip():
             return {"source": source_key, "status": "empty", "chunks": 0}
